@@ -1,10 +1,14 @@
+
+Commandlines Library Documentation
+==================================
+
 commandlines |Build Status| |Build status| |codecov.io| |Code Health|
 ---------------------------------------------------------------------
 
 What is Commandlines?
 ---------------------
 
-Commandlines is a Python library for command line application
+`Commandlines <https://github.com/chrissimpkins/commandlines>`__ is a Python library for command line application
 development that supports command line argument parsing, command string
 validation testing, & application logic. It has no external dependencies
 and provides broad Python interpreter support for Python 2.6+, Python
@@ -13,7 +17,7 @@ and provides broad Python interpreter support for Python 2.6+, Python
 Project Status
 --------------
 
-*Commandlines is in active development and, while it is tested and
+Commandlines is in active development and, while it is tested and
 usable in the current release version, there is no assurance of a stable
 API or backwards compatibility across minor and patch versions at this
 stage of development. Please freeze the library version in your
@@ -22,7 +26,7 @@ modules released in the master branch of the repository as part of your
 own project if you elect to use it in a production environment. This
 message will disappear when this is no longer the case and at that stage
 the library will be released as version 1.0.0 under `semantic versioning
-specifications <http://semver.org/>`__.*
+specifications <http://semver.org/>`__.
 
 How Do I Use It?
 ----------------
@@ -51,54 +55,54 @@ and you have access to:
 Arguments
 ^^^^^^^^^
 
-+-----------------+--------------------+--------------------+
-| Command Line    | Command Example    | Accessed/Tested    |
-| Arguments       |                    | With               |
-+=================+====================+====================+
-| Length of arg   | ``$ spam eggs -t - | ``c.argc == 4``    |
-| list            | -out file``        |                    |
-+-----------------+--------------------+--------------------+
-| Command suite   | ``$ spam eggs``    | ``c.subcmd == "egg |
-| sub-commands    |                    | s"``               |
-+-----------------+--------------------+--------------------+
-| Command suite   | ``$ spam eggs over | ``c.subsubcmd == " |
-| sub-sub-command | easy``             | overeasy"``        |
-| s               |                    |                    |
-+-----------------+--------------------+--------------------+
-| Short switch    | ``$ spam -e``      | ``c.contains_switc |
-| syntax          |                    | hes('e')``         |
-+-----------------+--------------------+--------------------+
-| Long switch     | ``$ spam --eggs``  | ``c.contains_switc |
-| syntax          |                    | hes('eggs')``      |
-+-----------------+--------------------+--------------------+
-| Multiple        | ``$ spam -e --eggs | ``c.contains_switc |
-| switches        |  --bacon``         | hes('e', 'eggs', ' |
-|                 |                    | bacon')``          |
-+-----------------+--------------------+--------------------+
-| Short opt-arg   | ``$ spam -o eggs`` | ``c.get_definition |
-| definition      |                    | ('o')``            |
-| syntax          |                    |                    |
-+-----------------+--------------------+--------------------+
-| Long opt-arg    | ``$ spam --out egg | ``c.get_definition |
-| definition      | s``                | ('out')``          |
-| syntax          |                    |                    |
-+-----------------+--------------------+--------------------+
-| Alt long        | ``$ spam --out=egg | ``c.get_definition |
-| opt-arg         | s``                | ('out')``          |
-| definition      |                    |                    |
-| syntax          |                    |                    |
-+-----------------+--------------------+--------------------+
-| Multiple same   | ``$ spam -o eggs - | ``c.get_multiple_d |
-| option          | o omelets``        | efinitions('o')``  |
-| definitions     |                    |                    |
-+-----------------+--------------------+--------------------+
-| Multi-option    | ``$ spam -mpns egg | ``c.contains_mops( |
-| short syntax    | s``                | 'm')``             |
-| switches        |                    |                    |
-+-----------------+--------------------+--------------------+
-| Next positional | ``$ spam eggs test | ``c.get_arg_after( |
-| argument        | /path``            | 'eggs')``          |
-+-----------------+--------------------+--------------------+
++-----------------+-----------------------------------+-------------------------------------+
+| Command Line    | Command Example                   | Accessed/Tested                     |
+| Arguments       |                                   | With                                |
++=================+===================================+=====================================+
+| Length of arg   | ``$ spam eggs -t --out file``     | ``c.argc == 4``                     |
+| list            |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Command suite   | ``$ spam eggs``                   | ``c.subcmd == "eggs"``              |
+| sub-commands    |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Command suite   | ``$ spam eggs over easy``         | ``c.subsubcmd == "overeasy"``       |
+| sub-sub-command |                                   |                                     |
+| s               |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Short switch    | ``$ spam -e``                     | ``c.contains_switches('e')``        |
+| syntax          |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Long switch     | ``$ spam --eggs``                 | ``c.contains_switches('eggs')``     |
+| syntax          |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Multiple        | ``$ spam -e --eggs``              | ``c.contains_switches('e', 'eggs')``|
+| switches        |                                   |                                     |
+|                 |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Short opt-arg   | ``$ spam -o eggs``                | ``c.get_definition('o')``           |
+| definition      |                                   |                                     |
+| syntax          |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Long opt-arg    | ``$ spam --out egg s``            | ``c.get_definition('out')``         |
+| definition      |                                   |                                     |
+| syntax          |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Alt long        | ``$ spam --out=egg s``            | ``c.get_definition('out')``         |
+| opt-arg         |                                   |                                     |
+| definition      |                                   |                                     |
+| syntax          |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Multiple same   | ``$ spam -o eggs -o omelets``     | ``c.get_multiple_definitions('o')`` |
+| option          |                                   |                                     |
+| definitions     |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Multi-option    | ``$ spam -mpns egg s``            | ``c.contains_mops('m')``            |
+| short syntax    |                                   |                                     |
+| switches        |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
+| Next positional | ``$ spam eggs test/path``         | ``c.get_arg_after('eggs')``         |
+| argument        |                                   |                                     |
++-----------------+-----------------------------------+-------------------------------------+
 
 Positional Arguments
 ^^^^^^^^^^^^^^^^^^^^
@@ -110,113 +114,113 @@ provided for the first five positional arguments and the last positional
 argument. An ordered list of all positional arguments is available in
 the ``arguments`` attribute.
 
-+-----------------+--------------------+--------------------+
-| Positional      | Command Example    | Accessed/Tested    |
-| Argument        |                    | With               |
-+=================+====================+====================+
-| Positional      | ``$ spam eggs``    | ``c.arg0``         |
-| argument at     |                    |                    |
-| index 0         |                    |                    |
-+-----------------+--------------------+--------------------+
-| Positional      | ``$ spam eggs baco | ``c.arg1``         |
-| argument at     | n``                |                    |
-| index 1         |                    |                    |
-+-----------------+--------------------+--------------------+
-| Positional      | ``$ spam eggs baco | ``c.arg2``         |
-| argument at     | n toast``          |                    |
-| index 2         |                    |                    |
-+-----------------+--------------------+--------------------+
-| Positional      | ``$ spam eggs baco | ``c.arg3``         |
-| argument at     | n toast cereal``   |                    |
-| index 3         |                    |                    |
-+-----------------+--------------------+--------------------+
-| Positional      | ``$ spam eggs baco | ``c.arg4``         |
-| argument at     | n toast cereal cof |                    |
-| index 4         | fee``              |                    |
-+-----------------+--------------------+--------------------+
-| Last positional | ``$ spam eggs -b - | ``c.arglp``        |
-| argument        | -toast filepath``  |                    |
-+-----------------+--------------------+--------------------+
-| All positional  | ``$ spam eggs -b - | ``c.arguments``    |
-| arguments       | -toast filepath``  |                    |
-+-----------------+--------------------+--------------------+
++-----------------+----------------------------------------+--------------------+
+| Positional      | Command Example                        | Accessed/Tested    |
+| Argument        |                                        | With               |
++=================+========================================+====================+
+| Positional      | ``$ spam eggs``                        | ``c.arg0``         |
+| argument at     |                                        |                    |
+| index 0         |                                        |                    |
++-----------------+----------------------------------------+--------------------+
+| Positional      | ``$ spam eggs bacon``                  | ``c.arg1``         |
+| argument at     |                                        |                    |
+| index 1         |                                        |                    |
++-----------------+----------------------------------------+--------------------+
+| Positional      | ``$ spam eggs bacon toast``            | ``c.arg2``         |
+| argument at     |                                        |                    |
+| index 2         |                                        |                    |
++-----------------+----------------------------------------+--------------------+
+| Positional      | ``$ spam eggs bacon toast cereal``     | ``c.arg3``         |
+| argument at     |                                        |                    |
+| index 3         |                                        |                    |
++-----------------+----------------------------------------+--------------------+
+| Positional      | ``$ spam eggs bacon toast cereal milk``| ``c.arg4``         |
+| argument at     |                                        |                    |
+| index 4         |                                        |                    |
++-----------------+----------------------------------------+--------------------+
+| Last positional | ``$ spam eggs -b --toast filepath``    | ``c.arglp``        |
+| argument        |                                        |                    |
++-----------------+----------------------------------------+--------------------+
+| All positional  | ``$ spam eggs -b - -toast filepath``   | ``c.arguments``    |
+| arguments       |                                        |                    |
++-----------------+----------------------------------------+--------------------+
 
 Special Command Line Idioms
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-+-----------------+--------------------+--------------------+
-| Command Line    | Command Example    | Accessed/Tested    |
-| Idioms          |                    | With               |
-+=================+====================+====================+
-| Double dash     | ``$ spam eggs -- - | ``c.has_double_das |
-| idiom           | badfile``          | h()``              |
-+-----------------+--------------------+--------------------+
-| Double dash     | ``$ spam eggs -- - | ``c.get_double_das |
-| arguments       | badfile -badfile2` | h_args()``         |
-|                 | `                  |                    |
-+-----------------+--------------------+--------------------+
++-----------------+----------------------------------------+----------------------------------------+
+| Command Line    | Command Example                        | Accessed/Tested                        |
+| Idioms          |                                        | With                                   |
++=================+========================================+========================================+
+| Double dash     | ``$ spam eggs -- -badfile``            | ``c.has_double_dash()``                |
+| idiom           |                                        |                                        |
++-----------------+----------------------------------------+----------------------------------------+
+| Double dash     | ``$ spam eggs -- -badfile -badfile2``  | ``c.get_double_dash_args()``           |
+| arguments       |                                        |                                        |
+|                 |                                        |                                        |
++-----------------+----------------------------------------+----------------------------------------+
 
 Application Logic Testing Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-+-----------------+--------------------+--------------------+
-| Test Type       | Command Example    | Tested With        |
-+=================+====================+====================+
-| Positional      | ``$ spam eggs doit | ``c.has_command_se |
-| command         | ``                 | quence('eggs', 'do |
-| sequence        |                    | it')``             |
-+-----------------+--------------------+--------------------+
-| Single switch   | ``$ spam -s``      | ``c.contains_switc |
-|                 |                    | hes('s')``         |
-+-----------------+--------------------+--------------------+
-| Multiple switch | ``$ spam -s --eggs | ``c.contains_switc |
-|                 | ``                 | hes('s', 'eggs')`` |
-+-----------------+--------------------+--------------------+
-| Single          | ``$ spam -o eggs`` | ``c.contains_defin |
-| definition      |                    | itions('o')``      |
-+-----------------+--------------------+--------------------+
-| Multiple        | ``$ spam -o eggs - | ``c.contains_defin |
-| different       | -with bacon``      | itions('o', 'with' |
-| definitions     |                    | )``                |
-+-----------------+--------------------+--------------------+
-| Multiple same   | ``$ spam -o eggs - | ``c.contains_multi |
-| definitions     | o bacon``          | _definitions('o')` |
-|                 |                    | `                  |
-+-----------------+--------------------+--------------------+
-| Positional      | ``$ spam eggs --co | ``c.has_args_after |
-| argument        | ffee``             | ('eggs')``         |
-+-----------------+--------------------+--------------------+
-| Acceptable      | ``$ spam eggs toas | ``c.next_arg_is_in |
-| positional arg  | ter``              | ('eggs', ['toaster |
-|                 |                    | ', 'coffeepot'])`` |
-+-----------------+--------------------+--------------------+
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Test Type       | Command Example                        | Tested With                                            |
++=================+========================================+========================================================+
+| Positional      | ``$ spam eggs doit``                   | ``c.has_command_sequence('eggs', 'doit')``             |
+| command         |                                        |                                                        |
+| sequence        |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Single switch   | ``$ spam -s``                          | ``c.contains_switches('s')``                           |
+|                 |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Multiple switch | ``$ spam -s --eggs``                   | ``c.contains_switches('s', 'eggs')``                   |
+|                 |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Single          | ``$ spam -o eggs``                     | ``c.contains_definitions('o')``                        |
+| definition      |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Multiple        | ``$ spam -o eggs --with bacon``        | ``c.contains_definitions('o', 'with')``                |
+| different       |                                        |                                                        |
+| definitions     |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Multiple same   | ``$ spam -o eggs -o bacon``            | ``c.contains_multi_definitions('o')``                  |
+| definitions     |                                        |                                                        |
+|                 |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Positional      | ``$ spam eggs --coffee``               | ``c.has_args_after('eggs')``                           |
+| argument        |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
+| Acceptable      | ``$ spam eggs toaster``                | ``c.next_arg_is_in('eggs', ['toaster', 'coffeepot'])`` |
+| positional arg  |                                        |                                                        |
+|                 |                                        |                                                        |
++-----------------+----------------------------------------+--------------------------------------------------------+
 
 Command String Validation Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-+-----------------+--------------------+--------------------+
-| Test Type       | Failure Example    | Tested With        |
-+=================+====================+====================+
-| Missing         | ``$ spam``         | ``c.does_not_valid |
-| arguments       |                    | ate_missing_args() |
-|                 |                    | ``                 |
-+-----------------+--------------------+--------------------+
-| Expected        | ``$ spam eggs``    | ``c.does_not_valid |
-| argument number |                    | ate_n_args(2)``    |
-+-----------------+--------------------+--------------------+
-| Missing opt-arg | ``$ spam -o --eggs | ``c.does_not_valid |
-| definitions     | ``                 | ate_missing_defs() |
-|                 |                    | ``                 |
-+-----------------+--------------------+--------------------+
-| Missing         | ``$ spam eggs``    | ``c.does_not_valid |
-| switches        |                    | ate_missing_switch |
-|                 |                    | es()``             |
-+-----------------+--------------------+--------------------+
-| Missing         | ``$ spam -o eggs`` | ``c.does_not_valid |
-| multi-option    |                    | ate_missing_mops() |
-| short syntax    |                    | ``                 |
-| switches        |                    |                    |
-+-----------------+--------------------+--------------------+
++-----------------+-------------------------+----------------------------------------------+
+| Test Type       | Failure Example         | Tested With                                  |
++=================+=========================+==============================================+
+| Missing         | ``$ spam``              | ``c.does_not_validate_missing_args()``       |
+| arguments       |                         |                                              |
+|                 |                         |                                              |
++-----------------+-------------------------+----------------------------------------------+
+| Expected        | ``$ spam eggs``         | ``c.does_not_validate_n_args(2)``            |
+| argument number |                         |                                              |
++-----------------+-------------------------+----------------------------------------------+
+| Missing opt-arg | ``$ spam -o --eggs``    | ``c.does_not_validate_missing_defs()``       |
+| definitions     |                         |                                              |
+|                 |                         |                                              |
++-----------------+-------------------------+----------------------------------------------+
+| Missing         | ``$ spam eggs``         | ``c.does_not_validate_missing_switches()``   |
+| switches        |                         |                                              |
+|                 |                         |                                              |
++-----------------+-------------------------+----------------------------------------------+
+| Missing         | ``$ spam -o eggs``      | ``c.does_not_validate_missing_mops()``       |
+| multi-option    |                         |                                              |
+| short syntax    |                         |                                              |
+| switches        |                         |                                              |
++-----------------+-------------------------+----------------------------------------------+
 
 Help, Usage, and Version Request Testing Methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -314,6 +318,9 @@ License
 -------
 
 Commandlines is licensed under the `MIT license <docs/LICENSE>`__.
+
+
+
 
 .. |Build Status| image:: https://travis-ci.org/chrissimpkins/commandlines.svg?branch=master
    :target: https://travis-ci.org/chrissimpkins/commandlines

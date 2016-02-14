@@ -8,7 +8,7 @@ commandlines |Build Status| |Build status| |codecov.io| |Code Health|
 What is Commandlines?
 ---------------------
 
-Commandlines is a Python library for command line application
+`Commandlines <https://github.com/chrissimpkins/commandlines>`__ is a Python library for command line application
 development that supports command line argument parsing, command string
 validation testing, & application logic. It has no external dependencies
 and provides broad Python interpreter support for Python 2.6+, Python
