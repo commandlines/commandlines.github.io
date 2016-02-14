@@ -82,8 +82,8 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Library API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="commandlines.exceptions.html">Exceptions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Commandlines API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlines.exceptions.html">Commandlines Exceptions</a></li>
 </ul>
 
             
@@ -130,10 +130,10 @@
 <span id="commandlines-library-module"></span><h1>commandlines.library module<a class="headerlink" href="#module-commandlines.library" title="Permalink to this headline">¶</a></h1>
 <p>The commandlines.library module contains the Command, Arguments, Definitions, Mops, MultiDefinitions, and Switches
 classes.  These objects are used to parse command line argument strings to command line syntax specific Python objects.</p>
-<p>The Command class is a high level object that is intended to be the public facing portion of the library API.  The
+<p>The Command class is a high level object that is intended to be the public facing portion of the library.  The
 commandlines Command object can be imported into projects with the following import statement:</p>
 <p><cite>from commandlines import Command</cite></p>
-<p>Exceptions raised by this module are contained in the <cite>commandlines.exceptions</cite> module.</p>
+<p>Exceptions raised by this module are in the <cite>commandlines.exceptions</cite> module.</p>
 <dl class="class">
 <dt id="commandlines.library.Arguments">
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Arguments</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments" title="Permalink to this definition">¶</a></dt>
@@ -263,6 +263,21 @@ beginning of the strings in the <cite>def_needles</cite> parameter.</p>
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; (tuple) One or more expected definition option key(s).</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.contains_mops">
+<code class="descname">contains_mops</code><span class="sig-paren">(</span><em>*mops_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_mops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_mops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more multi-option
+short syntax switch characters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
 </tbody>
 </table>

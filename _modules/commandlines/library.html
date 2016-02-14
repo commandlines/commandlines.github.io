@@ -134,12 +134,12 @@
 <span class="sd">&quot;&quot;&quot;The commandlines.library module contains the Command, Arguments, Definitions, Mops, MultiDefinitions, and Switches</span>
 <span class="sd">classes.  These objects are used to parse command line argument strings to command line syntax specific Python objects.</span>
 
-<span class="sd">The Command class is a high level object that is intended to be the public facing portion of the library API.  The</span>
+<span class="sd">The Command class is a high level object that is intended to be the public facing portion of the library.  The</span>
 <span class="sd">commandlines Command object can be imported into projects with the following import statement:</span>
 
 <span class="sd">`from commandlines import Command`</span>
 
-<span class="sd">Exceptions raised by this module are contained in the `commandlines.exceptions` module.</span>
+<span class="sd">Exceptions raised by this module are in the `commandlines.exceptions` module.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">sys</span>
@@ -174,9 +174,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">has_defs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_mdefs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="c1"># v0.3.0</span>
-    <span class="c1"># [X] add support for double dash command line idiom (e.g. -- -badfilename)</span>
-    <span class="c1"># [X] add support for multiple same option definitions (e.g. -o &lt;path1&gt; -o &lt;path2&gt;) - New MultiDefinitions class</span>
     <span class="c1"># v0.4.0</span>
     <span class="c1"># TODO: support for default arguments in definitions</span>
     <span class="c1"># TODO: implement mandatory argument test that supports short / long option alternatives</span>
@@ -287,6 +284,15 @@
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">switch_needles</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Command.contains_mops"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.contains_mops">[docs]</a>    <span class="k">def</span> <span class="nf">contains_mops</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">mops_needles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates presence (True) or absence (False) of one or more multi-option</span>
+<span class="sd">        short syntax switch characters.</span>
+
+<span class="sd">        :type mops_needles: tuple of one or more expected single character switches</span>
+<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mops</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">mops_needles</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Command.contains_definitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.contains_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">contains_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">def_needles</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Test for the presence of one or more option-argument definitions in the command string.  Returns boolean</span>

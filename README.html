@@ -80,7 +80,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="commandlines.html">commandlines package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlines.library.html">Commandlines API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlines.exceptions.html">Commandlines Exceptions</a></li>
 </ul>
 
             
@@ -111,7 +112,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>commandlines</li>
+    <li>commandlines    </li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -123,9 +124,498 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="commandlines">
-<h1>commandlines<a class="headerlink" href="#commandlines" title="Permalink to this headline">¶</a></h1>
-<p>A Python command line parser. In development and not ready for use.</p>
+  <div class="section" id="commandlines-build-status-build-status-codecov-io-code-health">
+<h1>commandlines <a class="reference external" href="https://travis-ci.org/chrissimpkins/commandlines"><img alt="Build Status" src="https://travis-ci.org/chrissimpkins/commandlines.svg?branch=master" /></a> <a class="reference external" href="https://ci.appveyor.com/project/chrissimpkins/commandlines/branch/master"><img alt="Build status" src="https://ci.appveyor.com/api/projects/status/nabadxorf9s8n0h5/branch/master?svg=true" /></a> <a class="reference external" href="https://codecov.io/github/chrissimpkins/commandlines?branch=master"><img alt="codecov.io" src="https://codecov.io/github/chrissimpkins/commandlines/coverage.svg?branch=master" /></a> <a class="reference external" href="https://landscape.io/github/chrissimpkins/commandlines/master"><img alt="Code Health" src="https://landscape.io/github/chrissimpkins/commandlines/master/landscape.svg?style=flat" /></a><a class="headerlink" href="#commandlines-build-status-build-status-codecov-io-code-health" title="Permalink to this headline">¶</a></h1>
+</div>
+<div class="section" id="what-is-commandlines">
+<h1>What is Commandlines?<a class="headerlink" href="#what-is-commandlines" title="Permalink to this headline">¶</a></h1>
+<p>Commandlines is a Python library for command line application
+development that supports command line argument parsing, command string
+validation testing, &amp; application logic. It has no external dependencies
+and provides broad Python interpreter support for Python 2.6+, Python
+3.3+, pypy, and pypy3 across OS X, Linux, and Windows platforms.</p>
+</div>
+<div class="section" id="project-status">
+<h1>Project Status<a class="headerlink" href="#project-status" title="Permalink to this headline">¶</a></h1>
+<p><em>Commandlines is in active development and, while it is tested and
+usable in the current release version, there is no assurance of a stable
+API or backwards compatibility across minor and patch versions at this
+stage of development. Please freeze the library version in your
+deployment/installation scripts or include the Commandlines library
+modules released in the master branch of the repository as part of your
+own project if you elect to use it in a production environment. This
+message will disappear when this is no longer the case and at that stage
+the library will be released as version 1.0.0 under `semantic versioning
+specifications &lt;http://semver.org/&gt;`__.</em></p>
+</div>
+<div class="section" id="how-do-i-use-it">
+<h1>How Do I Use It?<a class="headerlink" href="#how-do-i-use-it" title="Permalink to this headline">¶</a></h1>
+<p>Commandlines supports explicit, expressive command line application
+source code with a broad, permissive command syntax range. The goal is
+to make application logic simple to implement, intuitive, and easy to
+maintain.</p>
+<p>The command line string to your executable script is parsed to multiple
+objects that are derived from builtin Python types.</p>
+<div class="section" id="the-command-object">
+<h2>The Command Object<a class="headerlink" href="#the-command-object" title="Permalink to this headline">¶</a></h2>
+<p>Instantiate a <code class="docutils literal"><span class="pre">commandlines</span></code> Command object:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commandlines</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>and you have access to:</p>
+<div class="section" id="arguments">
+<h3>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command Line
+Arguments</th>
+<th class="head">Command Example</th>
+<th class="head">Accessed/Tested
+With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Length of arg
+list</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">-t</span> <span class="pre">-</span>
+<span class="pre">-out</span> <span class="pre">file</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.argc</span> <span class="pre">==</span> <span class="pre">4</span></code></td>
+</tr>
+<tr class="row-odd"><td>Command suite
+sub-commands</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.subcmd</span> <span class="pre">==</span> <span class="pre">&quot;egg</span>
+<span class="pre">s&quot;</span></code></td>
+</tr>
+<tr class="row-even"><td>Command suite
+sub-sub-command
+s</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">over</span>
+<span class="pre">easy</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.subsubcmd</span> <span class="pre">==</span> <span class="pre">&quot;</span>
+<span class="pre">overeasy&quot;</span></code></td>
+</tr>
+<tr class="row-odd"><td>Short switch
+syntax</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-e</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.contains_switc</span>
+<span class="pre">hes('e')</span></code></td>
+</tr>
+<tr class="row-even"><td>Long switch
+syntax</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.contains_switc</span>
+<span class="pre">hes('eggs')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Multiple
+switches</td>
+<td><dl class="first last docutils">
+<dt><a href="#id1"><span class="problematic" id="id2">``</span></a>$ spam -e &#8211;eggs</dt>
+<dd>&#8211;bacon``</dd>
+</dl>
+</td>
+<td><code class="docutils literal"><span class="pre">c.contains_switc</span>
+<span class="pre">hes('e',</span> <span class="pre">'eggs',</span> <span class="pre">'</span>
+<span class="pre">bacon')</span></code></td>
+</tr>
+<tr class="row-even"><td>Short opt-arg
+definition
+syntax</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-o</span> <span class="pre">eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.get_definition</span>
+<span class="pre">('o')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Long opt-arg
+definition
+syntax</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--out</span> <span class="pre">egg</span>
+<span class="pre">s</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.get_definition</span>
+<span class="pre">('out')</span></code></td>
+</tr>
+<tr class="row-even"><td>Alt long
+opt-arg
+definition
+syntax</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--out=egg</span>
+<span class="pre">s</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.get_definition</span>
+<span class="pre">('out')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Multiple same
+option
+definitions</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-o</span> <span class="pre">eggs</span> <span class="pre">-</span>
+<span class="pre">o</span> <span class="pre">omelets</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.get_multiple_d</span>
+<span class="pre">efinitions('o')</span></code></td>
+</tr>
+<tr class="row-even"><td>Multi-option
+short syntax
+switches</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-mpns</span> <span class="pre">egg</span>
+<span class="pre">s</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.contains_mops(</span>
+<span class="pre">'m')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Next positional
+argument</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">test</span>
+<span class="pre">/path</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.get_arg_after(</span>
+<span class="pre">'eggs')</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="positional-arguments">
+<h3>Positional Arguments<a class="headerlink" href="#positional-arguments" title="Permalink to this headline">¶</a></h3>
+<p>Positional arguments use a 0 based index starting at the first argument
+to the executable (i.e. <code class="docutils literal"><span class="pre">sys.argv[1:]</span></code>) and are maintained as
+attributes in the Command object. Individual attribute support is
+provided for the first five positional arguments and the last positional
+argument. An ordered list of all positional arguments is available in
+the <code class="docutils literal"><span class="pre">arguments</span></code> attribute.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Positional
+Argument</th>
+<th class="head">Command Example</th>
+<th class="head">Accessed/Tested
+With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Positional
+argument at
+index 0</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arg0</span></code></td>
+</tr>
+<tr class="row-odd"><td>Positional
+argument at
+index 1</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">baco</span>
+<span class="pre">n</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arg1</span></code></td>
+</tr>
+<tr class="row-even"><td>Positional
+argument at
+index 2</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">baco</span>
+<span class="pre">n</span> <span class="pre">toast</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arg2</span></code></td>
+</tr>
+<tr class="row-odd"><td>Positional
+argument at
+index 3</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">baco</span>
+<span class="pre">n</span> <span class="pre">toast</span> <span class="pre">cereal</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arg3</span></code></td>
+</tr>
+<tr class="row-even"><td>Positional
+argument at
+index 4</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">baco</span>
+<span class="pre">n</span> <span class="pre">toast</span> <span class="pre">cereal</span> <span class="pre">cof</span>
+<span class="pre">fee</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arg4</span></code></td>
+</tr>
+<tr class="row-odd"><td>Last positional
+argument</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">-b</span> <span class="pre">-</span>
+<span class="pre">-toast</span> <span class="pre">filepath</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arglp</span></code></td>
+</tr>
+<tr class="row-even"><td>All positional
+arguments</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">-b</span> <span class="pre">-</span>
+<span class="pre">-toast</span> <span class="pre">filepath</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.arguments</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="special-command-line-idioms">
+<h3>Special Command Line Idioms<a class="headerlink" href="#special-command-line-idioms" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Command Line
+Idioms</th>
+<th class="head">Command Example</th>
+<th class="head">Accessed/Tested
+With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Double dash
+idiom</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">--</span> <span class="pre">-</span>
+<span class="pre">badfile</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.has_double_das</span>
+<span class="pre">h()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Double dash
+arguments</td>
+<td><a href="#id3"><span class="problematic" id="id4">``</span></a>$ spam eggs &#8211; -
+badfile -badfile2`
+`</td>
+<td><code class="docutils literal"><span class="pre">c.get_double_das</span>
+<span class="pre">h_args()</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="application-logic-testing-methods">
+<h3>Application Logic Testing Methods<a class="headerlink" href="#application-logic-testing-methods" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Test Type</th>
+<th class="head">Command Example</th>
+<th class="head">Tested With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Positional
+command
+sequence</td>
+<td><a href="#id5"><span class="problematic" id="id6">``</span></a>$ spam eggs doit
+``</td>
+<td><code class="docutils literal"><span class="pre">c.has_command_se</span>
+<span class="pre">quence('eggs',</span> <span class="pre">'do</span>
+<span class="pre">it')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Single switch</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-s</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.contains_switc</span>
+<span class="pre">hes('s')</span></code></td>
+</tr>
+<tr class="row-even"><td>Multiple switch</td>
+<td><a href="#id7"><span class="problematic" id="id8">``</span></a>$ spam -s &#8211;eggs
+``</td>
+<td><code class="docutils literal"><span class="pre">c.contains_switc</span>
+<span class="pre">hes('s',</span> <span class="pre">'eggs')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Single
+definition</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-o</span> <span class="pre">eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.contains_defin</span>
+<span class="pre">itions('o')</span></code></td>
+</tr>
+<tr class="row-even"><td>Multiple
+different
+definitions</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-o</span> <span class="pre">eggs</span> <span class="pre">-</span>
+<span class="pre">-with</span> <span class="pre">bacon</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.contains_defin</span>
+<span class="pre">itions('o',</span> <span class="pre">'with'</span>
+<span class="pre">)</span></code></td>
+</tr>
+<tr class="row-odd"><td>Multiple same
+definitions</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-o</span> <span class="pre">eggs</span> <span class="pre">-</span>
+<span class="pre">o</span> <span class="pre">bacon</span></code></td>
+<td><a href="#id9"><span class="problematic" id="id10">``</span></a>c.contains_multi
+_definitions(&#8216;o&#8217;)`
+`</td>
+</tr>
+<tr class="row-even"><td>Positional
+argument</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">--co</span>
+<span class="pre">ffee</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.has_args_after</span>
+<span class="pre">('eggs')</span></code></td>
+</tr>
+<tr class="row-odd"><td>Acceptable
+positional arg</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">toas</span>
+<span class="pre">ter</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.next_arg_is_in</span>
+<span class="pre">('eggs',</span> <span class="pre">['toaster</span>
+<span class="pre">',</span> <span class="pre">'coffeepot'])</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="command-string-validation-methods">
+<h3>Command String Validation Methods<a class="headerlink" href="#command-string-validation-methods" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="35%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Test Type</th>
+<th class="head">Failure Example</th>
+<th class="head">Tested With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Missing
+arguments</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span></code></td>
+<td><a href="#id11"><span class="problematic" id="id12">``</span></a>c.does_not_valid
+ate_missing_args()
+``</td>
+</tr>
+<tr class="row-odd"><td>Expected
+argument number</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.does_not_valid</span>
+<span class="pre">ate_n_args(2)</span></code></td>
+</tr>
+<tr class="row-even"><td>Missing opt-arg
+definitions</td>
+<td><a href="#id13"><span class="problematic" id="id14">``</span></a>$ spam -o &#8211;eggs
+``</td>
+<td><a href="#id15"><span class="problematic" id="id16">``</span></a>c.does_not_valid
+ate_missing_defs()
+``</td>
+</tr>
+<tr class="row-odd"><td>Missing
+switches</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.does_not_valid</span>
+<span class="pre">ate_missing_switch</span>
+<span class="pre">es()</span></code></td>
+</tr>
+<tr class="row-even"><td>Missing
+multi-option
+short syntax
+switches</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-o</span> <span class="pre">eggs</span></code></td>
+<td><a href="#id17"><span class="problematic" id="id18">``</span></a>c.does_not_valid
+ate_missing_mops()
+``</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="help-usage-and-version-request-testing-methods">
+<h3>Help, Usage, and Version Request Testing Methods<a class="headerlink" href="#help-usage-and-version-request-testing-methods" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="30%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Test Type</th>
+<th class="head">Command Example</th>
+<th class="head">Tested With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Help request, short</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-h</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_help_request()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Help request, long</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--help</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_help_request()</span></code></td>
+</tr>
+<tr class="row-even"><td>Usage request</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--usage</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_usage_request()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Version request, short</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-v</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_version_request()</span></code></td>
+</tr>
+<tr class="row-even"><td>Version request, long</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--version</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_version_request()</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="api-documentation">
+<h2>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h2>
+<p>The Command class is designed to be the public facing library object.
+You can view full documentation of this Python class
+<a class="reference external" href="https://commandlines.github.io/commandlines.library.html#commandlines.library.Command">here</a>.</p>
+<p>If you would like to dig into lower level objects in the commandlines
+package, you can view the <a class="reference external" href="https://commandlines.github.io/commandlines.library.html">library API
+documentation</a>.</p>
+<p>Exceptions that are used in the commandlines package are documented
+<a class="reference external" href="https://commandlines.github.io/commandlines.exceptions.html">here</a>.</p>
+</div>
+</div>
+<div class="section" id="how-to-include-commandlines-in-your-project">
+<h1>How to Include Commandlines in Your Project<a class="headerlink" href="#how-to-include-commandlines-in-your-project" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="for-projects-that-will-be-distributed-to-others">
+<h2>For Projects That Will Be Distributed to Others<a class="headerlink" href="#for-projects-that-will-be-distributed-to-others" title="Permalink to this headline">¶</a></h2>
+<p>Add the <code class="docutils literal"><span class="pre">commandlines</span></code> package dependency to your project <code class="docutils literal"><span class="pre">setup.py</span></code>
+file in the <code class="docutils literal"><span class="pre">install_requires</span></code> field like so:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span>setup(
+    ...
+    install_requires=[&quot;commandlines == x.x.x&quot;],
+    ...
+)
+</pre></div>
+</div>
+<p>It is <strong>highly recommended</strong> that you explicitly define the library
+version by replacing <code class="docutils literal"><span class="pre">x.x.x</span></code> with the version that you used for
+testing. The project is in active development and backwards
+compatibility is not assured at this stage.</p>
+<p>Then, enter the following command to test your project locally:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ python setup.py develop
+</pre></div>
+</div>
+<p>Import the <code class="docutils literal"><span class="pre">commandlines</span></code> package in your project and instantiate a
+Command object by adding the following lines to your Python script:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commandlines</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And away you go...</p>
+<p>The Commandlines package will be installed automatically for users who
+install your releases via <code class="docutils literal"><span class="pre">pip</span></code> or your project <code class="docutils literal"><span class="pre">setup.py</span></code> file
+(i.e. with the command <code class="docutils literal"><span class="pre">$</span> <span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">install</span></code>).</p>
+</div>
+<div class="section" id="for-local-projects-that-are-not-intended-for-redistribution">
+<h2>For Local Projects That Are Not Intended for Redistribution<a class="headerlink" href="#for-local-projects-that-are-not-intended-for-redistribution" title="Permalink to this headline">¶</a></h2>
+<p>Install the Commandlines package with the command:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>$ pip install commandlines
+</pre></div>
+</div>
+<p>Import the <code class="docutils literal"><span class="pre">commandlines</span></code> package in your project and instantiate a
+Command object by adding the following lines to your Python script:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commandlines</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="license">
+<h1>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h1>
+<p>Commandlines is licensed under the <a class="reference external" href="docs/LICENSE">MIT license</a>.</p>
 </div>
 
 
