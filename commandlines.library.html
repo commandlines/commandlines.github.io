@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>commandlines.library module &mdash; commandlines 0.3.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="commandlines 0.3.0 documentation" href="index.html"/>
+        <link rel="up" title="commandlines package" href="commandlines.html"/>
+        <link rel="prev" title="commandlines.exceptions module" href="commandlines.exceptions.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> commandlines
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.3.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="commandlines.html">commandlines package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="commandlines.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="commandlines.exceptions.html">commandlines.exceptions module</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">commandlines.library module</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="commandlines.html#module-commandlines">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">commandlines</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="commandlines.html">commandlines package</a> &raquo;</li>
+      
+    <li>commandlines.library module</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-commandlines.library">
+<span id="commandlines-library-module"></span><h1>commandlines.library module<a class="headerlink" href="#module-commandlines.library" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="commandlines.library.Arguments">
+<em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Arguments</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">list</span></code></p>
+<p>A class that includes all command line arguments with positional order maintained.  Instantiated with a list
+of strings.</p>
+<blockquote>
+<div>The class is derived from the Python list type.</div></blockquote>
+<dl class="method">
+<dt id="commandlines.library.Arguments.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test arguments</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; an iterable that contains one or more test argument strings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Arguments.get_arg_next">
+<code class="descname">get_arg_next</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_arg_next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_arg_next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the next argument at index position + 1 in the command sequence.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; the argument string for which the next positional argument is requested</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">IndexOutOfRangeError if the position + 1 falls outside of the index range</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Arguments.get_arg_position">
+<code class="descname">get_arg_position</code><span class="sig-paren">(</span><em>test_arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_arg_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_arg_position" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index position of a candidate argument string (test_arg).  The argument string should include
+any expected dashes at the beginning of the argument string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>test_arg</strong> &#8211; the argument string for which the index position is requested</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingArgumentError if the requested argument is not in the Argument list</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Arguments.get_argument">
+<code class="descname">get_argument</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns argument by argument index position in the Argument object list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; The command line index position</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">IndexOutOfRangeError if the requested index falls outside of the list index range</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Arguments.get_argument_for_commandobj">
+<code class="descname">get_argument_for_commandobj</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_argument_for_commandobj"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_argument_for_commandobj" title="Permalink to this definition">¶</a></dt>
+<dd><p>An argument parsing method for the instantation of the Command object.  This is not intended for public use.
+Public calls should use the get_argument() method instead.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; The command line index position</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string or empty string if the index position is out of the index range</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="commandlines.library.Command">
+<em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Command</code><a class="reference internal" href="_modules/commandlines/library.html#Command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>An object that is parsed from a command line command string</p>
+<dl class="method">
+<dt id="commandlines.library.Command.contains_definitions">
+<code class="descname">contains_definitions</code><span class="sig-paren">(</span><em>*def_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_definitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more definition options</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; a tuple of one or more expected definition key(s)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.contains_multi_definitions">
+<code class="descname">contains_multi_definitions</code><span class="sig-paren">(</span><em>*def_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_multi_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_multi_definitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more multi definition
+options</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; a tuple of one or more expected definition key(s)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.contains_switches">
+<code class="descname">contains_switches</code><span class="sig-paren">(</span><em>*switch_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_switches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_switches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more switches.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>switch_needles</strong> &#8211; a tuple of one or more expected switch strings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.does_not_validate_missing_args">
+<code class="descname">does_not_validate_missing_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.does_not_validate_missing_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.does_not_validate_missing_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for missing arguments to the executable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.does_not_validate_missing_defs">
+<code class="descname">does_not_validate_missing_defs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.does_not_validate_missing_defs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.does_not_validate_missing_defs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for missing definitions to the executable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.does_not_validate_missing_mops">
+<code class="descname">does_not_validate_missing_mops</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.does_not_validate_missing_mops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.does_not_validate_missing_mops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for missing multi-option short syntax arguments to the executable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.does_not_validate_missing_switches">
+<code class="descname">does_not_validate_missing_switches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.does_not_validate_missing_switches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.does_not_validate_missing_switches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for missing switches to the executable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.does_not_validate_n_args">
+<code class="descname">does_not_validate_n_args</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.does_not_validate_n_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.does_not_validate_n_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for inclusion of exactly n arguments to executable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> &#8211; an integer that defines the number of expected arguments for this test</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.get_arg_after">
+<code class="descname">get_arg_after</code><span class="sig-paren">(</span><em>target_arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_arg_after"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_arg_after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the next positional argument at position n + 1 to a command line argument at index position n</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>target_arg</strong> &#8211; argument string for the search</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingArgumentError when target_arg is not found in the parsed argument list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">IndexOutOfRangeError when target_arg is the last positional argument</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.get_definition">
+<code class="descname">get_definition</code><span class="sig-paren">(</span><em>def_needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_definition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the argument to an option that is part of an option-argument pair.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needle</strong> &#8211; The option string of the option-argument pair</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingDictionaryKeyError when the option string is not found</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.get_double_dash_args">
+<code class="descname">get_double_dash_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_double_dash_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_double_dash_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the arguments after the double dash <cite>&#8211;</cite> command line idiom as a list.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.get_multiple_definitions">
+<code class="descname">get_multiple_definitions</code><span class="sig-paren">(</span><em>def_needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_multiple_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_multiple_definitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of arguments to an option that is included multiple times in an option-argument
+syntax on the command line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needle</strong> &#8211; The option string of the option-argument pair</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingDictionaryKeyError when the option string is not found</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.has_args_after">
+<code class="descname">has_args_after</code><span class="sig-paren">(</span><em>argument_needle</em>, <em>number=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.has_args_after"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.has_args_after" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test for presence of at least one or more positional arguments (indicated by numbers) following an existing
+argument (argument_needle).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>number</strong> &#8211; The number of expected arguments after the test argument</li>
+<li><strong>argument_needle</strong> &#8211; The test argument that is known to be present in the command</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">MissingArgumentError when argument_needle is not found in the parsed argument list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.has_command_sequence">
+<code class="descname">has_command_sequence</code><span class="sig-paren">(</span><em>*cmd_list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.has_command_sequence"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.has_command_sequence" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test for a sequence of command line tokens in the command string.  The test begins at index position 0
+of the argument list and is case-sensitive.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmd_list</strong> &#8211; tuple of expected commands in expected order starting at Command.argv index 0</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.has_double_dash">
+<code class="descname">has_double_dash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.has_double_dash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.has_double_dash" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test for the presence of the double dash <cite>&#8211;</cite> command line idiom and return boolean.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.is_help_request">
+<code class="descname">is_help_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_help_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_help_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for -h and &#8211;help options in command string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.is_usage_request">
+<code class="descname">is_usage_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_usage_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_usage_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for &#8211;usage option in command string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.is_version_request">
+<code class="descname">is_version_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_version_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_version_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for -v and &#8211;version options in command string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.next_arg_is_in">
+<code class="descname">next_arg_is_in</code><span class="sig-paren">(</span><em>start_argument</em>, <em>supported_at_next_position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.next_arg_is_in"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.next_arg_is_in" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test for the presence of a supported argument in the n+1 index position for a known argument at the
+n position.  start_argument is called as the full argument string including any expected dashes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>start_argument</strong> &#8211; The argument string including any expected dashes</li>
+<li><strong>supported_at_next_position</strong> &#8211; list of strings that define supported arguments in the n+1 index position</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last">MissingArgumentError when start_argument is not found in the parsed argument list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.obj_string">
+<code class="descname">obj_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.obj_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.obj_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a string of the instance attributes of the Command object intended for display.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.validates_includes_args">
+<code class="descname">validates_includes_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.validates_includes_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.validates_includes_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for inclusion of at least one argument to the executable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.validates_includes_definitions">
+<code class="descname">validates_includes_definitions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.validates_includes_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.validates_includes_definitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for inclusion of at least one definition (option-argument) to the executable</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.validates_includes_mops">
+<code class="descname">validates_includes_mops</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.validates_includes_mops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.validates_includes_mops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for inclusion of at least one multi-option short syntax argument to the
+executable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.validates_includes_n_args">
+<code class="descname">validates_includes_n_args</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.validates_includes_n_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.validates_includes_n_args" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for inclusion of exactly <cite>number</cite> arguments to executable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> &#8211; an integer that defines the number of expected arguments for this test</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.validates_includes_switches">
+<code class="descname">validates_includes_switches</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.validates_includes_switches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.validates_includes_switches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Command string validation for inclusion of at least one switch argument to the executable.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="commandlines.library.Definitions">
+<em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Definitions</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
+<p>A class that is instantiated with all command line definition options as defined by the syntax
+<cite>-s &lt;defintion argument&gt;</cite> or <cite>&#8211;longoption &lt;defintion argument&gt;</cite> or</p>
+<blockquote>
+<div><p><cite>&#8211;longoption=&lt;definition argument&gt;</cite> or <cite>-longoption &lt;definition argument&gt;</cite>.</p>
+<p>To parse as a definition option, the argument to the option must not contain any dashes at the beginning of
+the argument string.  For example, <cite>-o &#8211;long</cite> is not considered a definition option-arg pair, whereas
+<cite>-o long</cite> is.</p>
+<p>This class is derived from the Python dictionary type.  The mapping is:</p>
+<p>key = option string with all dash &#8216;-&#8216; character(s) at the beginning of the string removed
+value = definition argument string</p>
+</div></blockquote>
+<dl class="method">
+<dt id="commandlines.library.Definitions.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test definitions.
+The definitions should be passed without initial dash characters in the definition argument name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Definitions.get_def_argument">
+<code class="descname">get_def_argument</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions.get_def_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions.get_def_argument" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the defintion option string for an option needle.  The needle parameter should not include
+dash characters at the beginning of the option string (i.e. use &#8216;test&#8217; rather than &#8216;&#8211;test&#8217; and
+&#8216;t&#8217; rather than &#8216;-t&#8217;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; the requested definition option string.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingDictionaryKeyError if the option needle is not a key defined in the Definitions object</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="commandlines.library.Mops">
+<em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Mops</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Mops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Mops" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">set</span></code></p>
+<p>A class that is instantiated with unique switches from multi-option command line options that use the
+short syntax.</p>
+<p>Examples: -rnj -tlx</p>
+<p>The class is derived from the Python set type and the single character option switches are stored as set items.</p>
+<dl class="method">
+<dt id="commandlines.library.Mops.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Mops.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Mops.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test Mops syntax option
+switches.  These should be a single character list of one or more expected options without dashes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="commandlines.library.MultiDefinitions">
+<em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">MultiDefinitions</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#MultiDefinitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.MultiDefinitions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">commandlines.library.Definitions</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="commandlines.library.Switches">
+<em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Switches</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Switches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Switches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">set</span></code></p>
+<p>A class that is instantiated with all command line switches that have the syntax <cite>-s</cite>, <cite>&#8211;longswitch</cite>,
+or <cite>-longswitch</cite></p>
+<blockquote>
+<div>The class is derived from the Python set type and arguments with this syntax are saved as set items.</div></blockquote>
+<dl class="method">
+<dt id="commandlines.library.Switches.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Switches.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Switches.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test switches.
+Switch parameters in needle tuple should be passed without initial dash character(s) in the test switch
+argument name.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="commandlines.exceptions.html" class="btn btn-neutral" title="commandlines.exceptions module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Christopher Simpkins.
+
+    </p>
+  </div> 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.3.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
