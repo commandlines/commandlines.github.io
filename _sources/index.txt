@@ -317,7 +317,7 @@ Command object by adding the following lines to your Python script:
 License
 -------
 
-Commandlines is licensed under the `MIT license <docs/LICENSE>`__.
+Commandlines is licensed under the `MIT license <https://github.com/chrissimpkins/commandlines/blob/master/docs/LICENSE>`__.
 
 
 
