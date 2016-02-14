@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="commandlines 0.3.0 documentation" href="index.html"/>
-        <link rel="up" title="commandlines package" href="commandlines.html"/>
-        <link rel="prev" title="commandlines.exceptions module" href="commandlines.exceptions.html"/> 
+        <link rel="next" title="commandlines.exceptions module" href="commandlines.exceptions.html"/>
+        <link rel="prev" title="Commandlines Library Documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -82,15 +82,8 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="commandlines.html">commandlines package</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="commandlines.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="commandlines.exceptions.html">commandlines.exceptions module</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="">commandlines.library module</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="commandlines.html#module-commandlines">Module contents</a></li>
-</ul>
-</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Library API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commandlines.exceptions.html">Exceptions</a></li>
 </ul>
 
             
@@ -121,8 +114,6 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-          <li><a href="commandlines.html">commandlines package</a> &raquo;</li>
-      
     <li>commandlines.library module</li>
       <li class="wy-breadcrumbs-aside">
         
@@ -137,23 +128,39 @@
             
   <div class="section" id="module-commandlines.library">
 <span id="commandlines-library-module"></span><h1>commandlines.library module<a class="headerlink" href="#module-commandlines.library" title="Permalink to this headline">¶</a></h1>
+<p>The commandlines.library module contains the Command, Arguments, Definitions, Mops, MultiDefinitions, and Switches
+classes.  These objects are used to parse command line argument strings to command line syntax specific Python objects.</p>
+<p>The Command class is a high level object that is intended to be the public facing portion of the library API.  The
+commandlines Command object can be imported into projects with the following import statement:</p>
+<p><cite>from commandlines import Command</cite></p>
+<p>Exceptions raised by this module are contained in the <cite>commandlines.exceptions</cite> module.</p>
 <dl class="class">
 <dt id="commandlines.library.Arguments">
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Arguments</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">list</span></code></p>
-<p>A class that includes all command line arguments with positional order maintained.  Instantiated with a list
-of strings.</p>
+<p>A class that includes all command line arguments with positional argument order maintained.  Instantiated with
+a list of command line string tokens.</p>
 <blockquote>
-<div>The class is derived from the Python list type.</div></blockquote>
-<dl class="method">
-<dt id="commandlines.library.Arguments.contains">
-<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.contains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test arguments</p>
+<div><p>The class is derived from the Python list type.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; an iterable that contains one or more test argument strings</td>
+<tr class="field-odd field"><th class="field-name">param argv:</th><td class="field-body">A list of command line arguments that maintain the argument order that was entered on command line</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<dl class="method">
+<dt id="commandlines.library.Arguments.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of one or more test
+arguments.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; (iterable) An iterable that contains one or more test argument strings.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
@@ -164,16 +171,16 @@ of strings.</p>
 <dl class="method">
 <dt id="commandlines.library.Arguments.get_arg_next">
 <code class="descname">get_arg_next</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_arg_next"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_arg_next" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the next argument at index position + 1 in the command sequence.</p>
+<dd><p>Returns the next argument at index <cite>position</cite> + 1 in the command sequence.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; the argument string for which the next positional argument is requested</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; (integer) The argument index position in the Argument list</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">IndexOutOfRangeError if the position + 1 falls outside of the index range</td>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">IndexOutOfRangeError if the <cite>position</cite> + 1 index falls outside of the existing index range</td>
 </tr>
 </tbody>
 </table>
@@ -182,13 +189,14 @@ of strings.</p>
 <dl class="method">
 <dt id="commandlines.library.Arguments.get_arg_position">
 <code class="descname">get_arg_position</code><span class="sig-paren">(</span><em>test_arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_arg_position"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_arg_position" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the index position of a candidate argument string (test_arg).  The argument string should include
-any expected dashes at the beginning of the argument string.</p>
+<dd><p>Returns the index position of the <cite>test_arg</cite> parameter candidate argument string.  The argument string
+should include the dashes at the beginning of the argument string that would be expected with use on the
+command line.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>test_arg</strong> &#8211; the argument string for which the index position is requested</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>test_arg</strong> &#8211; (string) The argument string for which the index position is requested</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
@@ -201,12 +209,12 @@ any expected dashes at the beginning of the argument string.</p>
 <dl class="method">
 <dt id="commandlines.library.Arguments.get_argument">
 <code class="descname">get_argument</code><span class="sig-paren">(</span><em>position</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Arguments.get_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Arguments.get_argument" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns argument by argument index position in the Argument object list.</p>
+<dd><p>Returns an argument string by the argument list index position.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; The command line index position</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>position</strong> &#8211; (integer) The command line index position</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
@@ -239,16 +247,20 @@ Public calls should use the get_argument() method instead.</p>
 <dt id="commandlines.library.Command">
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Command</code><a class="reference internal" href="_modules/commandlines/library.html#Command"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
-<p>An object that is parsed from a command line command string</p>
+<p>An object that maintains syntax specific components of a command line string and provides methods to support
+the development of Python command line applications.</p>
+<p>The class is instantiated from the list of command line arguments that are passed to a Python script in <cite>sys.argv</cite>.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.contains_definitions">
 <code class="descname">contains_definitions</code><span class="sig-paren">(</span><em>*def_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_definitions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more definition options</p>
+<dd><p>Test for the presence of one or more option-argument definitions in the command string.  Returns boolean
+that indicates presence (True) or absence (False) of definition options.  Dashes should not be used at the
+beginning of the strings in the <cite>def_needles</cite> parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; a tuple of one or more expected definition key(s)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; (tuple) One or more expected definition option key(s).</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
@@ -259,13 +271,15 @@ Public calls should use the get_argument() method instead.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.contains_multi_definitions">
 <code class="descname">contains_multi_definitions</code><span class="sig-paren">(</span><em>*def_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_multi_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_multi_definitions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more multi definition
-options</p>
+<dd><p>Test for the presence of multiple option-argument definitions that use the same option string.  An example is</p>
+<p><cite>$ executable -o file1 -o file2</cite></p>
+<p>The dashes in the argument strings should not be included in the <cite>def_needles</cite> parameter. Returns boolean that
+indicates presence (True) or absence (False) of one or more multi-definition options.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; a tuple of one or more expected definition key(s)</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needles</strong> &#8211; (tuple) One or more expected definition option key(s).</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
@@ -276,12 +290,14 @@ options</p>
 <dl class="method">
 <dt id="commandlines.library.Command.contains_switches">
 <code class="descname">contains_switches</code><span class="sig-paren">(</span><em>*switch_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_switches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_switches" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns boolean that indicates presence (True) or absence (False) of one or more switches.</p>
+<dd><p>Test for the presence of one or more switches in the command string. Returns boolean that indicates presence
+(True) or absence (False) of switches.  Dashes should not be used at the beginning of the strings in the
+<cite>switch_needles</cite> parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>switch_needles</strong> &#8211; a tuple of one or more expected switch strings</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>switch_needles</strong> &#8211; (tuple) One or more expected switch strings.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
@@ -292,12 +308,12 @@ options</p>
 <dl class="method">
 <dt id="commandlines.library.Command.does_not_validate_missing_args">
 <code class="descname">does_not_validate_missing_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.does_not_validate_missing_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.does_not_validate_missing_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Command string validation for missing arguments to the executable</p>
+<dd><p>Command string validation for missing arguments to the executable.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = does not validate. False = validates</td>
 </tr>
 </tbody>
 </table>
@@ -311,7 +327,7 @@ options</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = does not validate. False = validates</td>
 </tr>
 </tbody>
 </table>
@@ -325,7 +341,7 @@ options</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = does not validate. False = validates</td>
 </tr>
 </tbody>
 </table>
@@ -339,7 +355,7 @@ options</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = does not validate. False = validates</td>
 </tr>
 </tbody>
 </table>
@@ -353,9 +369,9 @@ options</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> &#8211; an integer that defines the number of expected arguments for this test</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> &#8211; (integer) Defines the number of expected arguments for this test</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = does not validate. False = validates</td>
 </tr>
 </tbody>
 </table>
@@ -364,12 +380,12 @@ options</p>
 <dl class="method">
 <dt id="commandlines.library.Command.get_arg_after">
 <code class="descname">get_arg_after</code><span class="sig-paren">(</span><em>target_arg</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_arg_after"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_arg_after" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the next positional argument at position n + 1 to a command line argument at index position n</p>
+<dd><p>Returns the next positional argument at index position n + 1 to a command line argument at index position n.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>target_arg</strong> &#8211; argument string for the search</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>target_arg</strong> &#8211; (string) Argument string for the test.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
@@ -384,12 +400,12 @@ options</p>
 <dl class="method">
 <dt id="commandlines.library.Command.get_definition">
 <code class="descname">get_definition</code><span class="sig-paren">(</span><em>def_needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_definition"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_definition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the argument to an option that is part of an option-argument pair.</p>
+<dd><p>Returns the argument to an option that is part of an option-argument definition pair.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needle</strong> &#8211; The option string of the option-argument pair</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needle</strong> &#8211; (string) The option string of the option-argument pair</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
@@ -403,18 +419,26 @@ options</p>
 <dt id="commandlines.library.Command.get_double_dash_args">
 <code class="descname">get_double_dash_args</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_double_dash_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_double_dash_args" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the arguments after the double dash <cite>&#8211;</cite> command line idiom as a list.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">list of strings</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="commandlines.library.Command.get_multiple_definitions">
 <code class="descname">get_multiple_definitions</code><span class="sig-paren">(</span><em>def_needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_multiple_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_multiple_definitions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the list of arguments to an option that is included multiple times in an option-argument
-syntax on the command line.</p>
+<dd><p>Returns a list of argument strings to an option that is included multiple times using option-argument
+syntax on the command line (e.g. <cite>$ executable -o file1 -o file2</cite>)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needle</strong> &#8211; The option string of the option-argument pair</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>def_needle</strong> &#8211; (string) The option string of the option-argument pair</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
@@ -427,15 +451,15 @@ syntax on the command line.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.has_args_after">
 <code class="descname">has_args_after</code><span class="sig-paren">(</span><em>argument_needle</em>, <em>number=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.has_args_after"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.has_args_after" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test for presence of at least one or more positional arguments (indicated by numbers) following an existing
-argument (argument_needle).</p>
+<dd><p>Test for the presence of at least one (default) positional arguments following an existing argument
+(argument_needle).  The number of expected arguments is modified by definining the number method parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>number</strong> &#8211; The number of expected arguments after the test argument</li>
-<li><strong>argument_needle</strong> &#8211; The test argument that is known to be present in the command</li>
+<li><strong>number</strong> &#8211; (integer) The number of expected arguments after the test argument</li>
+<li><strong>argument_needle</strong> &#8211; (string) The test argument that is known to be present in the command</li>
 </ul>
 </td>
 </tr>
@@ -455,7 +479,7 @@ of the argument list and is case-sensitive.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmd_list</strong> &#8211; tuple of expected commands in expected order starting at Command.argv index 0</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>cmd_list</strong> &#8211; (tuple) Expected commands in expected order starting at Command.argv index position 0</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
@@ -466,18 +490,26 @@ of the argument list and is case-sensitive.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.has_double_dash">
 <code class="descname">has_double_dash</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.has_double_dash"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.has_double_dash" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test for the presence of the double dash <cite>&#8211;</cite> command line idiom and return boolean.</p>
+<dd><p>Test for the presence of the double dash <cite>&#8211;</cite> command line idiom.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = has double dash token. False = does not contain double dash token.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="method">
 <dt id="commandlines.library.Command.is_help_request">
 <code class="descname">is_help_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_help_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_help_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tests for -h and &#8211;help options in command string</p>
+<dd><p>Tests for <cite>-h</cite> and <cite>&#8211;help</cite> options in command string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included help request option. False = did not include help request option.</td>
 </tr>
 </tbody>
 </table>
@@ -486,12 +518,12 @@ of the argument list and is case-sensitive.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.is_usage_request">
 <code class="descname">is_usage_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_usage_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_usage_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tests for &#8211;usage option in command string</p>
+<dd><p>Tests for <cite>&#8211;usage</cite> option in command string</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included usage request option. False = did not include usage request option.</td>
 </tr>
 </tbody>
 </table>
@@ -500,12 +532,12 @@ of the argument list and is case-sensitive.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.is_version_request">
 <code class="descname">is_version_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_version_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_version_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Tests for -v and &#8211;version options in command string.</p>
+<dd><p>Tests for <cite>-v</cite> and <cite>&#8211;version</cite> options in command string.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included version request option. False = did not include version request option.</td>
 </tr>
 </tbody>
 </table>
@@ -521,8 +553,8 @@ n position.  start_argument is called as the full argument string including any 
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>start_argument</strong> &#8211; The argument string including any expected dashes</li>
-<li><strong>supported_at_next_position</strong> &#8211; list of strings that define supported arguments in the n+1 index position</li>
+<li><strong>start_argument</strong> &#8211; (string) The argument string including any beginning dashes as used on the command line.</li>
+<li><strong>supported_at_next_position</strong> &#8211; (list) list of strings that define supported arguments in the n+1 index</li>
 </ul>
 </td>
 </tr>
@@ -536,7 +568,9 @@ n position.  start_argument is called as the full argument string including any 
 <dl class="method">
 <dt id="commandlines.library.Command.obj_string">
 <code class="descname">obj_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.obj_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.obj_string" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a string of the instance attributes of the Command object intended for display.</p>
+<dd><p>Returns a string of the instance attributes of the Command object intended for standard output use
+as a display of parsed Command object attributes.  Intended for use by a developer who would like a simple way
+to print these values to the standard output of a terminal emulator for testing purposes.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -555,7 +589,7 @@ n position.  start_argument is called as the full argument string including any 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = validates. False = does not validate.</td>
 </tr>
 </tbody>
 </table>
@@ -569,7 +603,7 @@ n position.  start_argument is called as the full argument string including any 
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = validates. False = does not validate.</td>
 </tr>
 </tbody>
 </table>
@@ -584,7 +618,7 @@ executable.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = validates. False = does not validate.</td>
 </tr>
 </tbody>
 </table>
@@ -593,14 +627,14 @@ executable.</p>
 <dl class="method">
 <dt id="commandlines.library.Command.validates_includes_n_args">
 <code class="descname">validates_includes_n_args</code><span class="sig-paren">(</span><em>number</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.validates_includes_n_args"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.validates_includes_n_args" title="Permalink to this definition">¶</a></dt>
-<dd><p>Command string validation for inclusion of exactly <cite>number</cite> arguments to executable.</p>
+<dd><p>Command string validation for inclusion of exactly <cite>number</cite> arguments to the executable.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> &#8211; an integer that defines the number of expected arguments for this test</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>number</strong> &#8211; (integer)  Defines the number of expected arguments for this test</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = validates. False = does not validate.</td>
 </tr>
 </tbody>
 </table>
@@ -614,7 +648,7 @@ executable.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = validates. False = does not validate.</td>
 </tr>
 </tbody>
 </table>
@@ -627,26 +661,37 @@ executable.</p>
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Definitions</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">dict</span></code></p>
 <p>A class that is instantiated with all command line definition options as defined by the syntax
-<cite>-s &lt;defintion argument&gt;</cite> or <cite>&#8211;longoption &lt;defintion argument&gt;</cite> or</p>
-<blockquote>
-<div><p><cite>&#8211;longoption=&lt;definition argument&gt;</cite> or <cite>-longoption &lt;definition argument&gt;</cite>.</p>
+<cite>-s &lt;defintion argument&gt;</cite>,  <cite>&#8211;longoption &lt;defintion argument&gt;</cite>,
+<cite>&#8211;longoption=&lt;definition argument&gt;</cite>, or <cite>-longoption &lt;definition argument&gt;</cite>.</p>
 <p>To parse as a definition option, the argument to the option must not contain any dashes at the beginning of
 the argument string.  For example, <cite>-o &#8211;long</cite> is not considered a definition option-arg pair, whereas
 <cite>-o long</cite> is.</p>
 <p>This class is derived from the Python dictionary type.  The mapping is:</p>
-<p>key = option string with all dash &#8216;-&#8216; character(s) at the beginning of the string removed
-value = definition argument string</p>
-</div></blockquote>
-<dl class="method">
-<dt id="commandlines.library.Definitions.contains">
-<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions.contains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test definitions.
-The definitions should be passed without initial dash characters in the definition argument name.</p>
+<p>key = option string with all dash &#8216;-&#8216; character(s) at the beginning of the string removed.  Internal dashes are
+maintained.</p>
+<p>value = definition argument string.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> &#8211; (list) A list of command line arguments that maintain the argument order that was entered on command line</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="commandlines.library.Definitions.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of option-argument
+definitions by option match attempt.</p>
+<p>The definition option string should be used without any initial dash characters in the definition argument name
+in contrast to how they were used on the command line.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; (tuple) A tuple of one or more option strings from expected definition option-argument string pairs</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
 </tbody>
 </table>
@@ -655,14 +700,14 @@ The definitions should be passed without initial dash characters in the definiti
 <dl class="method">
 <dt id="commandlines.library.Definitions.get_def_argument">
 <code class="descname">get_def_argument</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Definitions.get_def_argument"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Definitions.get_def_argument" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the defintion option string for an option needle.  The needle parameter should not include
-dash characters at the beginning of the option string (i.e. use &#8216;test&#8217; rather than &#8216;&#8211;test&#8217; and
-&#8216;t&#8217; rather than &#8216;-t&#8217;.</p>
+<dd><p>Returns the definition argument string for a definition option test.  The needle parameter should not include
+dash characters at the beginning of the option string (i.e. use &#8216;test&#8217; rather than &#8216;&#8211;test&#8217; and &#8216;t&#8217; rather than
+&#8216;-t&#8217;).</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; the requested definition option string.</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; (string) The requested option string from the definition option-argument pair.</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">string</td>
 </tr>
@@ -678,20 +723,32 @@ dash characters at the beginning of the option string (i.e. use &#8216;test&#821
 <dt id="commandlines.library.Mops">
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Mops</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Mops"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Mops" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">set</span></code></p>
-<p>A class that is instantiated with unique switches from multi-option command line options that use the
-short syntax.</p>
+<p>A class that is instantiated with unique switches from multi-option command line options that use short,
+single dash syntax.</p>
 <p>Examples: -rnj -tlx</p>
+<p>Each alphabetic character in the option token is parsed to a separate option token.</p>
 <p>The class is derived from the Python set type and the single character option switches are stored as set items.</p>
-<dl class="method">
-<dt id="commandlines.library.Mops.contains">
-<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Mops.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Mops.contains" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test Mops syntax option
-switches.  These should be a single character list of one or more expected options without dashes.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> &#8211; (list) A list of command line arguments that maintain the argument order that was entered on command line</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="commandlines.library.Mops.contains">
+<code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Mops.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Mops.contains" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns boolean that indicates the presence (True) or absence (False) of a tuple of test Mops syntax option
+switches.  The test strings should each be a single character without the dash that is used at the beginning of
+the entire token.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; (iterable) An iterable that contains one or more test argument characters as strings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
 </tbody>
 </table>
@@ -702,7 +759,25 @@ switches.  These should be a single character list of one or more expected optio
 <dl class="class">
 <dt id="commandlines.library.MultiDefinitions">
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">MultiDefinitions</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#MultiDefinitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.MultiDefinitions" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">commandlines.library.Definitions</span></code></p>
+<dd><p>Bases: <a class="reference internal" href="#commandlines.library.Definitions" title="commandlines.library.Definitions"><code class="xref py py-class docutils literal"><span class="pre">commandlines.library.Definitions</span></code></a></p>
+<p>A class that is used to parse option-argument definitions from a command line argument list where command line
+use includes multiple same option strings with different argument definitions.  An example is:</p>
+<p><cite>$ executable -o file1 -o file2</cite></p>
+<p>The class is derived from the commandlines.Definitions class (which is derived from Python dict). The
+commandlines.Definitions.contains and commandlines.Definitions.get_def_arguments methods are inherited from the
+Definitions class.</p>
+<p>The dictionary mapping is:</p>
+<p>key = option string with all dash &#8216;-&#8216; character(s) at the beginning of the string removed.  Internal dashes are
+maintained.</p>
+<p>value = list of all argument strings associated with the option string on the command line</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> &#8211; (list) A list of command line arguments that maintain the argument order that was entered on command line</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 <dl class="class">
@@ -710,9 +785,16 @@ switches.  These should be a single character list of one or more expected optio
 <em class="property">class </em><code class="descclassname">commandlines.library.</code><code class="descname">Switches</code><span class="sig-paren">(</span><em>argv</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Switches"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Switches" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">set</span></code></p>
 <p>A class that is instantiated with all command line switches that have the syntax <cite>-s</cite>, <cite>&#8211;longswitch</cite>,
-or <cite>-longswitch</cite></p>
-<blockquote>
-<div>The class is derived from the Python set type and arguments with this syntax are saved as set items.</div></blockquote>
+or <cite>-mops</cite>.</p>
+<p>The class is derived from the Python set type and arguments with this syntax are saved as set items.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>argv</strong> &#8211; (list) A list of command line arguments that maintain the argument order that was entered on command line</td>
+</tr>
+</tbody>
+</table>
 <dl class="method">
 <dt id="commandlines.library.Switches.contains">
 <code class="descname">contains</code><span class="sig-paren">(</span><em>needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Switches.contains"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Switches.contains" title="Permalink to this definition">¶</a></dt>
@@ -723,7 +805,9 @@ argument name.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>needle</strong> &#8211; (iterable) An iterable that contains one or more test argument strings.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean</td>
 </tr>
 </tbody>
 </table>
@@ -740,8 +824,10 @@ argument name.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="commandlines.exceptions.html" class="btn btn-neutral float-right" title="commandlines.exceptions module" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="commandlines.exceptions.html" class="btn btn-neutral" title="commandlines.exceptions module" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="index.html" class="btn btn-neutral" title="Commandlines Library Documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

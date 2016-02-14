@@ -81,7 +81,8 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../commandlines.html">commandlines package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commandlines.library.html">Commandlines API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../commandlines.exceptions.html">Commandlines Exceptions</a></li>
 </ul>
 
             
@@ -130,12 +131,27 @@
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 
+<span class="sd">&quot;&quot;&quot;The commandlines.library module contains the Command, Arguments, Definitions, Mops, MultiDefinitions, and Switches</span>
+<span class="sd">classes.  These objects are used to parse command line argument strings to command line syntax specific Python objects.</span>
+
+<span class="sd">The Command class is a high level object that is intended to be the public facing portion of the library API.  The</span>
+<span class="sd">commandlines Command object can be imported into projects with the following import statement:</span>
+
+<span class="sd">`from commandlines import Command`</span>
+
+<span class="sd">Exceptions raised by this module are contained in the `commandlines.exceptions` module.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
 <span class="kn">import</span> <span class="nn">sys</span>
 <span class="kn">from</span> <span class="nn">commandlines.exceptions</span> <span class="kn">import</span> <span class="n">IndexOutOfRangeError</span><span class="p">,</span> <span class="n">MissingArgumentError</span><span class="p">,</span> <span class="n">MissingDictionaryKeyError</span>
 
 
-<div class="viewcode-block" id="Command"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command">[docs]</a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;An object that is parsed from a command line command string&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Command"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command">[docs]</a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;An object that maintains syntax specific components of a command line string and provides methods to support</span>
+<span class="sd">    the development of Python command line applications.</span>
+
+<span class="sd">    The class is instantiated from the list of command line arguments that are passed to a Python script in `sys.argv`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="n">Arguments</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
@@ -177,79 +193,79 @@
     <span class="c1">#</span>
     <span class="c1"># //////////////////////////////////////////////////////////////</span>
 
-<div class="viewcode-block" id="Command.does_not_validate_missing_args"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.does_not_validate_missing_args">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Command string validation for missing arguments to the executable</span>
+<div class="viewcode-block" id="Command.does_not_validate_missing_args"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.does_not_validate_missing_args">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Command string validation for missing arguments to the executable.</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = does not validate. False = validates&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">argc</span> <span class="o">==</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.does_not_validate_missing_defs"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.does_not_validate_missing_defs">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.does_not_validate_missing_defs"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.does_not_validate_missing_defs">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_defs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for missing definitions to the executable</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = does not validate. False = validates&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.does_not_validate_missing_mops"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.does_not_validate_missing_mops">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_mops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.does_not_validate_missing_mops"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.does_not_validate_missing_mops">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_mops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for missing multi-option short syntax arguments to the executable</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = does not validate. False = validates&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mops</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.does_not_validate_missing_switches"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.does_not_validate_missing_switches">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_switches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.does_not_validate_missing_switches"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.does_not_validate_missing_switches">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_missing_switches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for missing switches to the executable</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = does not validate. False = validates&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.does_not_validate_n_args"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.does_not_validate_n_args">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_n_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.does_not_validate_n_args"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.does_not_validate_n_args">[docs]</a>    <span class="k">def</span> <span class="nf">does_not_validate_n_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of exactly n arguments to executable.</span>
 
-<span class="sd">           :param number: an integer that defines the number of expected arguments for this test</span>
-<span class="sd">           :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">           :param number: (integer) Defines the number of expected arguments for this test</span>
+<span class="sd">           :returns: boolean. True = does not validate. False = validates&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">argc</span> <span class="o">==</span> <span class="n">number</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span></div>
 
-<div class="viewcode-block" id="Command.validates_includes_args"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.validates_includes_args">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.validates_includes_args"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.validates_includes_args">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of at least one argument to the executable</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">argc</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.validates_includes_definitions"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.validates_includes_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.validates_includes_definitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.validates_includes_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of at least one definition (option-argument) to the executable</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.validates_includes_mops"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.validates_includes_mops">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_mops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.validates_includes_mops"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.validates_includes_mops">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_mops</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of at least one multi-option short syntax argument to the</span>
 <span class="sd">        executable.</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mops</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.validates_includes_switches"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.validates_includes_switches">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_switches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.validates_includes_switches"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.validates_includes_switches">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_switches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of at least one switch argument to the executable.</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="Command.validates_includes_n_args"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.validates_includes_n_args">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_n_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of exactly `number` arguments to executable.</span>
+<div class="viewcode-block" id="Command.validates_includes_n_args"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.validates_includes_n_args">[docs]</a>    <span class="k">def</span> <span class="nf">validates_includes_n_args</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Command string validation for inclusion of exactly `number` arguments to the executable.</span>
 
-<span class="sd">        :param number: an integer that defines the number of expected arguments for this test</span>
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :param number: (integer)  Defines the number of expected arguments for this test</span>
+<span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">argc</span> <span class="o">==</span> <span class="n">number</span></div>
 
@@ -262,36 +278,44 @@
     <span class="c1">#</span>
     <span class="c1"># //////////////////////////////////////////////////////////////</span>
 
-<div class="viewcode-block" id="Command.contains_switches"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.contains_switches">[docs]</a>    <span class="k">def</span> <span class="nf">contains_switches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">switch_needles</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates presence (True) or absence (False) of one or more switches.</span>
+<div class="viewcode-block" id="Command.contains_switches"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.contains_switches">[docs]</a>    <span class="k">def</span> <span class="nf">contains_switches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">switch_needles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test for the presence of one or more switches in the command string. Returns boolean that indicates presence</span>
+<span class="sd">        (True) or absence (False) of switches.  Dashes should not be used at the beginning of the strings in the</span>
+<span class="sd">        `switch_needles` parameter.</span>
 
-<span class="sd">        :param switch_needles: a tuple of one or more expected switch strings</span>
+<span class="sd">        :param switch_needles: (tuple) One or more expected switch strings.</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">switch_needles</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.contains_definitions"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.contains_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">contains_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">def_needles</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates presence (True) or absence (False) of one or more definition options</span>
+<div class="viewcode-block" id="Command.contains_definitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.contains_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">contains_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">def_needles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test for the presence of one or more option-argument definitions in the command string.  Returns boolean</span>
+<span class="sd">        that indicates presence (True) or absence (False) of definition options.  Dashes should not be used at the</span>
+<span class="sd">        beginning of the strings in the `def_needles` parameter.</span>
 
-<span class="sd">        :param def_needles: a tuple of one or more expected definition key(s)</span>
+<span class="sd">        :param def_needles: (tuple) One or more expected definition option key(s).</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">def_needles</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.contains_multi_definitions"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.contains_multi_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">contains_multi_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">def_needles</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates presence (True) or absence (False) of one or more multi definition</span>
-<span class="sd">        options</span>
+<div class="viewcode-block" id="Command.contains_multi_definitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.contains_multi_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">contains_multi_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">def_needles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test for the presence of multiple option-argument definitions that use the same option string.  An example is</span>
 
-<span class="sd">        :param def_needles: a tuple of one or more expected definition key(s)</span>
+<span class="sd">        `$ executable -o file1 -o file2`</span>
+
+<span class="sd">        The dashes in the argument strings should not be included in the `def_needles` parameter. Returns boolean that</span>
+<span class="sd">        indicates presence (True) or absence (False) of one or more multi-definition options.</span>
+
+<span class="sd">        :param def_needles: (tuple) One or more expected definition option key(s).</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">def_needles</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.has_command_sequence"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.has_command_sequence">[docs]</a>    <span class="k">def</span> <span class="nf">has_command_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">cmd_list</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.has_command_sequence"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.has_command_sequence">[docs]</a>    <span class="k">def</span> <span class="nf">has_command_sequence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">cmd_list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Test for a sequence of command line tokens in the command string.  The test begins at index position 0</span>
 <span class="sd">        of the argument list and is case-sensitive.</span>
 
-<span class="sd">        :param cmd_list: tuple of expected commands in expected order starting at Command.argv index 0</span>
+<span class="sd">        :param cmd_list: (tuple) Expected commands in expected order starting at Command.argv index position 0</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cmd_list</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">):</span>   <span class="c1"># request does not inlude more args than the Command.argv property includes</span>
@@ -305,12 +329,12 @@
                     <span class="k">return</span> <span class="bp">False</span>
             <span class="k">return</span> <span class="bp">True</span></div>
 
-<div class="viewcode-block" id="Command.has_args_after"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.has_args_after">[docs]</a>    <span class="k">def</span> <span class="nf">has_args_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument_needle</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test for presence of at least one or more positional arguments (indicated by numbers) following an existing</span>
-<span class="sd">        argument (argument_needle).</span>
+<div class="viewcode-block" id="Command.has_args_after"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.has_args_after">[docs]</a>    <span class="k">def</span> <span class="nf">has_args_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument_needle</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test for the presence of at least one (default) positional arguments following an existing argument</span>
+<span class="sd">        (argument_needle).  The number of expected arguments is modified by definining the number method parameter.</span>
 
-<span class="sd">        :param number: The number of expected arguments after the test argument</span>
-<span class="sd">        :param argument_needle: The test argument that is known to be present in the command</span>
+<span class="sd">        :param number: (integer) The number of expected arguments after the test argument</span>
+<span class="sd">        :param argument_needle: (string) The test argument that is known to be present in the command</span>
 <span class="sd">        :raises: MissingArgumentError when argument_needle is not found in the parsed argument list&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">argument_needle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span>
@@ -322,12 +346,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MissingArgumentError</span><span class="p">(</span><span class="n">argument_needle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.next_arg_is_in"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.next_arg_is_in">[docs]</a>    <span class="k">def</span> <span class="nf">next_arg_is_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_argument</span><span class="p">,</span> <span class="n">supported_at_next_position</span><span class="p">):</span>
+<div class="viewcode-block" id="Command.next_arg_is_in"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.next_arg_is_in">[docs]</a>    <span class="k">def</span> <span class="nf">next_arg_is_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start_argument</span><span class="p">,</span> <span class="n">supported_at_next_position</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Test for the presence of a supported argument in the n+1 index position for a known argument at the</span>
 <span class="sd">        n position.  start_argument is called as the full argument string including any expected dashes.</span>
 
-<span class="sd">        :param start_argument: The argument string including any expected dashes</span>
-<span class="sd">        :param supported_at_next_position: list of strings that define supported arguments in the n+1 index position</span>
+<span class="sd">        :param start_argument: (string) The argument string including any beginning dashes as used on the command line.</span>
+<span class="sd">        :param supported_at_next_position: (list) list of strings that define supported arguments in the n+1 index</span>
 <span class="sd">        :raises: MissingArgumentError when start_argument is not found in the parsed argument list&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="n">start_argument</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span>
@@ -346,8 +370,10 @@
     <span class="c1">#</span>
     <span class="c1"># //////////////////////////////////////////////////////////////</span>
 
-<div class="viewcode-block" id="Command.has_double_dash"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.has_double_dash">[docs]</a>    <span class="k">def</span> <span class="nf">has_double_dash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Test for the presence of the double dash `--` command line idiom and return boolean.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Command.has_double_dash"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.has_double_dash">[docs]</a>    <span class="k">def</span> <span class="nf">has_double_dash</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Test for the presence of the double dash `--` command line idiom.</span>
+
+<span class="sd">        :returns: boolean. True = has double dash token. False = does not contain double dash token.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;--&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
@@ -360,29 +386,29 @@
     <span class="c1">#</span>
     <span class="c1"># //////////////////////////////////////////////////////////////</span>
 
-<div class="viewcode-block" id="Command.get_definition"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.get_definition">[docs]</a>    <span class="k">def</span> <span class="nf">get_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">def_needle</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the argument to an option that is part of an option-argument pair.</span>
+<div class="viewcode-block" id="Command.get_definition"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.get_definition">[docs]</a>    <span class="k">def</span> <span class="nf">get_definition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">def_needle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the argument to an option that is part of an option-argument definition pair.</span>
 
-<span class="sd">        :param def_needle: The option string of the option-argument pair</span>
+<span class="sd">        :param def_needle: (string) The option string of the option-argument pair</span>
 <span class="sd">        :returns: string</span>
 <span class="sd">        :raises: MissingDictionaryKeyError when the option string is not found&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="o">.</span><span class="n">get_def_argument</span><span class="p">(</span><span class="n">def_needle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.get_multiple_definitions"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.get_multiple_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">get_multiple_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">def_needle</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the list of arguments to an option that is included multiple times in an option-argument</span>
-<span class="sd">        syntax on the command line.</span>
+<div class="viewcode-block" id="Command.get_multiple_definitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.get_multiple_definitions">[docs]</a>    <span class="k">def</span> <span class="nf">get_multiple_definitions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">def_needle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of argument strings to an option that is included multiple times using option-argument</span>
+<span class="sd">        syntax on the command line (e.g. `$ executable -o file1 -o file2`)</span>
 
-<span class="sd">        :param def_needle: The option string of the option-argument pair</span>
+<span class="sd">        :param def_needle: (string) The option string of the option-argument pair</span>
 <span class="sd">        :returns: string</span>
 <span class="sd">        :raises: MissingDictionaryKeyError when the option string is not found&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="o">.</span><span class="n">get_def_argument</span><span class="p">(</span><span class="n">def_needle</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.get_arg_after"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.get_arg_after">[docs]</a>    <span class="k">def</span> <span class="nf">get_arg_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_arg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the next positional argument at position n + 1 to a command line argument at index position n</span>
+<div class="viewcode-block" id="Command.get_arg_after"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.get_arg_after">[docs]</a>    <span class="k">def</span> <span class="nf">get_arg_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target_arg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the next positional argument at index position n + 1 to a command line argument at index position n.</span>
 
-<span class="sd">           :param target_arg: argument string for the search</span>
+<span class="sd">           :param target_arg: (string) Argument string for the test.</span>
 <span class="sd">           :returns: string</span>
 <span class="sd">           :raises: MissingArgumentError when target_arg is not found in the parsed argument list</span>
 <span class="sd">           :raises: IndexOutOfRangeError when target_arg is the last positional argument&quot;&quot;&quot;</span>
@@ -393,8 +419,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MissingArgumentError</span><span class="p">(</span><span class="n">target_arg</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Command.get_double_dash_args"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.get_double_dash_args">[docs]</a>    <span class="k">def</span> <span class="nf">get_double_dash_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the arguments after the double dash `--` command line idiom as a list.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Command.get_double_dash_args"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.get_double_dash_args">[docs]</a>    <span class="k">def</span> <span class="nf">get_double_dash_args</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the arguments after the double dash `--` command line idiom as a list.</span>
+
+<span class="sd">        :returns: list of strings&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;--&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">:</span>
             <span class="n">dd_position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="o">.</span><span class="n">get_arg_position</span><span class="p">(</span><span class="s2">&quot;--&quot;</span><span class="p">)</span>
@@ -409,30 +437,30 @@
     <span class="c1">#</span>
     <span class="c1"># /////////////////////////////////////////////////////////////</span>
 
-<div class="viewcode-block" id="Command.is_help_request"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.is_help_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_help_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Tests for -h and --help options in command string</span>
+<div class="viewcode-block" id="Command.is_help_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_help_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_help_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests for `-h` and `--help` options in command string</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = included help request option. False = did not include help request option.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;help&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span> <span class="ow">or</span> <span class="s2">&quot;h&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span></div>
 
-<div class="viewcode-block" id="Command.is_usage_request"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.is_usage_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_usage_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Tests for --usage option in command string</span>
+<div class="viewcode-block" id="Command.is_usage_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_usage_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_usage_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests for `--usage` option in command string</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = included usage request option. False = did not include usage request option.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;usage&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span></div>
 
-<div class="viewcode-block" id="Command.is_version_request"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.is_version_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_version_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Tests for -v and --version options in command string.</span>
+<div class="viewcode-block" id="Command.is_version_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_version_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_version_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests for `-v` and `--version` options in command string.</span>
 
-<span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = included version request option. False = did not include version request option.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;version&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span> <span class="ow">or</span> <span class="s2">&quot;v&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
@@ -445,8 +473,10 @@
     <span class="c1">#</span>
     <span class="c1"># /////////////////////////////////////////////////////////////</span>
 
-<div class="viewcode-block" id="Command.obj_string"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Command.obj_string">[docs]</a>    <span class="k">def</span> <span class="nf">obj_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a string of the instance attributes of the Command object intended for display.</span>
+<div class="viewcode-block" id="Command.obj_string"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.obj_string">[docs]</a>    <span class="k">def</span> <span class="nf">obj_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a string of the instance attributes of the Command object intended for standard output use</span>
+<span class="sd">        as a display of parsed Command object attributes.  Intended for use by a developer who would like a simple way</span>
+<span class="sd">        to print these values to the standard output of a terminal emulator for testing purposes.</span>
 
 <span class="sd">        :returns: string&quot;&quot;&quot;</span>
 
@@ -477,11 +507,13 @@
             <span class="k">return</span> <span class="s2">&quot;&#39;&quot;</span> <span class="o">+</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span></div>
 
 
-<div class="viewcode-block" id="Arguments"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Arguments">[docs]</a><span class="k">class</span> <span class="nc">Arguments</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class that includes all command line arguments with positional order maintained.  Instantiated with a list</span>
-<span class="sd">    of strings.</span>
+<div class="viewcode-block" id="Arguments"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Arguments">[docs]</a><span class="k">class</span> <span class="nc">Arguments</span><span class="p">(</span><span class="nb">list</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A class that includes all command line arguments with positional argument order maintained.  Instantiated with</span>
+<span class="sd">    a list of command line string tokens.</span>
 
-<span class="sd">      The class is derived from the Python list type.&quot;&quot;&quot;</span>
+<span class="sd">      The class is derived from the Python list type.</span>
+
+<span class="sd">      :param argv: A list of command line arguments that maintain the argument order that was entered on command line&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
         <span class="nb">list</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">)</span>
 
@@ -505,7 +537,7 @@
 
         <span class="k">return</span> <span class="s2">&quot;[&quot;</span> <span class="o">+</span> <span class="n">argument_string</span> <span class="o">+</span> <span class="s2">&quot;]&quot;</span>
 
-<div class="viewcode-block" id="Arguments.get_argument_for_commandobj"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Arguments.get_argument_for_commandobj">[docs]</a>    <span class="k">def</span> <span class="nf">get_argument_for_commandobj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+<div class="viewcode-block" id="Arguments.get_argument_for_commandobj"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Arguments.get_argument_for_commandobj">[docs]</a>    <span class="k">def</span> <span class="nf">get_argument_for_commandobj</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;An argument parsing method for the instantation of the Command object.  This is not intended for public use.</span>
 <span class="sd">        Public calls should use the get_argument() method instead.</span>
 
@@ -517,10 +549,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="s2">&quot;&quot;</span>   <span class="c1"># intentionally set as empty string rather than raise exception for Command obj instantation</span></div>
 
-<div class="viewcode-block" id="Arguments.get_argument"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Arguments.get_argument">[docs]</a>    <span class="k">def</span> <span class="nf">get_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns argument by argument index position in the Argument object list.</span>
+<div class="viewcode-block" id="Arguments.get_argument"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Arguments.get_argument">[docs]</a>    <span class="k">def</span> <span class="nf">get_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns an argument string by the argument list index position.</span>
 
-<span class="sd">        :param position: The command line index position</span>
+<span class="sd">        :param position: (integer) The command line index position</span>
 <span class="sd">        :returns: string</span>
 <span class="sd">        :raises: IndexOutOfRangeError if the requested index falls outside of the list index range&quot;&quot;&quot;</span>
 
@@ -529,11 +561,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">IndexOutOfRangeError</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Arguments.get_arg_position"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Arguments.get_arg_position">[docs]</a>    <span class="k">def</span> <span class="nf">get_arg_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_arg</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the index position of a candidate argument string (test_arg).  The argument string should include</span>
-<span class="sd">        any expected dashes at the beginning of the argument string.</span>
+<div class="viewcode-block" id="Arguments.get_arg_position"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Arguments.get_arg_position">[docs]</a>    <span class="k">def</span> <span class="nf">get_arg_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">test_arg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the index position of the `test_arg` parameter candidate argument string.  The argument string</span>
+<span class="sd">        should include the dashes at the beginning of the argument string that would be expected with use on the</span>
+<span class="sd">        command line.</span>
 
-<span class="sd">        :param test_arg: the argument string for which the index position is requested</span>
+<span class="sd">        :param test_arg: (string) The argument string for which the index position is requested</span>
 <span class="sd">        :returns: string</span>
 <span class="sd">        :raises: MissingArgumentError if the requested argument is not in the Argument list&quot;&quot;&quot;</span>
 
@@ -542,22 +575,23 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">MissingArgumentError</span><span class="p">(</span><span class="n">test_arg</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Arguments.get_arg_next"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Arguments.get_arg_next">[docs]</a>    <span class="k">def</span> <span class="nf">get_arg_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the next argument at index position + 1 in the command sequence.</span>
+<div class="viewcode-block" id="Arguments.get_arg_next"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Arguments.get_arg_next">[docs]</a>    <span class="k">def</span> <span class="nf">get_arg_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the next argument at index `position` + 1 in the command sequence.</span>
 
-<span class="sd">        :param position: the argument string for which the next positional argument is requested</span>
+<span class="sd">        :param position: (integer) The argument index position in the Argument list</span>
 <span class="sd">        :returns: string</span>
-<span class="sd">        :raises: IndexOutOfRangeError if the position + 1 falls outside of the index range&quot;&quot;&quot;</span>
+<span class="sd">        :raises: IndexOutOfRangeError if the `position` + 1 index falls outside of the existing index range&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">position</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="p">[</span><span class="n">position</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">IndexOutOfRangeError</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Arguments.contains"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Arguments.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates the presence (True) or absence (False) of a tuple of test arguments</span>
+<div class="viewcode-block" id="Arguments.contains"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Arguments.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates the presence (True) or absence (False) of a tuple of one or more test</span>
+<span class="sd">        arguments.</span>
 
-<span class="sd">        :param needle: an iterable that contains one or more test argument strings</span>
+<span class="sd">        :param needle: (iterable) An iterable that contains one or more test argument strings.</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">expected_argument</span> <span class="ow">in</span> <span class="n">needle</span><span class="p">:</span>
@@ -569,11 +603,14 @@
         <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># if all tests above pass</span></div></div>
 
 
-<div class="viewcode-block" id="Switches"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Switches">[docs]</a><span class="k">class</span> <span class="nc">Switches</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
+<div class="viewcode-block" id="Switches"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Switches">[docs]</a><span class="k">class</span> <span class="nc">Switches</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A class that is instantiated with all command line switches that have the syntax `-s`, `--longswitch`,</span>
-<span class="sd">    or `-longswitch`</span>
+<span class="sd">    or `-mops`.</span>
 
-<span class="sd">       The class is derived from the Python set type and arguments with this syntax are saved as set items.&quot;&quot;&quot;</span>
+<span class="sd">    The class is derived from the Python set type and arguments with this syntax are saved as set items.</span>
+
+<span class="sd">    :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
         <span class="nb">set</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_switch_set</span><span class="p">(</span><span class="n">argv</span><span class="p">))</span>
 
@@ -598,9 +635,10 @@
         <span class="k">return</span> <span class="s2">&quot;{&quot;</span> <span class="o">+</span> <span class="n">switch_string</span> <span class="o">+</span> <span class="s2">&quot;}&quot;</span>
 
     <span class="k">def</span> <span class="nf">_make_switch_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a set that includes all switches that are parsed from the command string.</span>
+        <span class="sd">&quot;&quot;&quot;Returns a set that includes all switches that are parsed from the command string.  Used to instantiate Switch</span>
+<span class="sd">        objects.</span>
 
-<span class="sd">        :param argv: a list of ordered command line argument strings</span>
+<span class="sd">        :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
 <span class="sd">        :returns: set&quot;&quot;&quot;</span>
 
         <span class="n">switchset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -615,12 +653,12 @@
 
         <span class="k">return</span> <span class="n">switchset</span>
 
-<div class="viewcode-block" id="Switches.contains"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Switches.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
+<div class="viewcode-block" id="Switches.contains"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Switches.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns boolean that indicates the presence (True) or absence (False) of a tuple of test switches.</span>
 <span class="sd">        Switch parameters in needle tuple should be passed without initial dash character(s) in the test switch</span>
 <span class="sd">        argument name.</span>
 
-<span class="sd">        :type needle: an iterable that contains one or more test argument strings</span>
+<span class="sd">        :param needle: (iterable) An iterable that contains one or more test argument strings.</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">expected_argument</span> <span class="ow">in</span> <span class="n">needle</span><span class="p">:</span>
@@ -632,13 +670,18 @@
         <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># if all tests above pass</span></div></div>
 
 
-<div class="viewcode-block" id="Mops"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Mops">[docs]</a><span class="k">class</span> <span class="nc">Mops</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A class that is instantiated with unique switches from multi-option command line options that use the</span>
-<span class="sd">    short syntax.</span>
+<div class="viewcode-block" id="Mops"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Mops">[docs]</a><span class="k">class</span> <span class="nc">Mops</span><span class="p">(</span><span class="nb">set</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A class that is instantiated with unique switches from multi-option command line options that use short,</span>
+<span class="sd">    single dash syntax.</span>
 
 <span class="sd">    Examples: -rnj -tlx</span>
 
-<span class="sd">    The class is derived from the Python set type and the single character option switches are stored as set items.&quot;&quot;&quot;</span>
+<span class="sd">    Each alphabetic character in the option token is parsed to a separate option token.</span>
+
+<span class="sd">    The class is derived from the Python set type and the single character option switches are stored as set items.</span>
+
+<span class="sd">    :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
         <span class="nb">set</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_mops_set</span><span class="p">(</span><span class="n">argv</span><span class="p">))</span>
@@ -665,9 +708,9 @@
 
     <span class="k">def</span> <span class="nf">_make_mops_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns a set of multi-option short syntax option characters that are parsed from a list of ordered</span>
-<span class="sd">        command string arguments in argv</span>
+<span class="sd">        command string arguments in the parameter `argv`.</span>
 
-<span class="sd">        :param argv: ordered list of command line arguments</span>
+<span class="sd">        :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
 <span class="sd">        :returns: set&quot;&quot;&quot;</span>
 
         <span class="n">mopsset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
@@ -680,11 +723,12 @@
                             <span class="n">mopsset</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">switch</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mopsset</span>
 
-<div class="viewcode-block" id="Mops.contains"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Mops.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
+<div class="viewcode-block" id="Mops.contains"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Mops.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns boolean that indicates the presence (True) or absence (False) of a tuple of test Mops syntax option</span>
-<span class="sd">        switches.  These should be a single character list of one or more expected options without dashes.</span>
+<span class="sd">        switches.  The test strings should each be a single character without the dash that is used at the beginning of</span>
+<span class="sd">        the entire token.</span>
 
-<span class="sd">        :type needle: an iterable that contains one or more test argument strings</span>
+<span class="sd">        :param needle: (iterable) An iterable that contains one or more test argument characters as strings.</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">expected_argument</span> <span class="ow">in</span> <span class="n">needle</span><span class="p">:</span>
@@ -696,19 +740,24 @@
         <span class="k">return</span> <span class="bp">True</span></div></div>
 
 
-<div class="viewcode-block" id="Definitions"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Definitions">[docs]</a><span class="k">class</span> <span class="nc">Definitions</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="Definitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Definitions">[docs]</a><span class="k">class</span> <span class="nc">Definitions</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A class that is instantiated with all command line definition options as defined by the syntax</span>
-<span class="sd">       `-s &lt;defintion argument&gt;` or `--longoption &lt;defintion argument&gt;` or</span>
-<span class="sd">        `--longoption=&lt;definition argument&gt;` or `-longoption &lt;definition argument&gt;`.</span>
+<span class="sd">    `-s &lt;defintion argument&gt;`,  `--longoption &lt;defintion argument&gt;`,</span>
+<span class="sd">    `--longoption=&lt;definition argument&gt;`, or `-longoption &lt;definition argument&gt;`.</span>
 
-<span class="sd">        To parse as a definition option, the argument to the option must not contain any dashes at the beginning of</span>
-<span class="sd">        the argument string.  For example, `-o --long` is not considered a definition option-arg pair, whereas</span>
-<span class="sd">        `-o long` is.</span>
+<span class="sd">    To parse as a definition option, the argument to the option must not contain any dashes at the beginning of</span>
+<span class="sd">    the argument string.  For example, `-o --long` is not considered a definition option-arg pair, whereas</span>
+<span class="sd">    `-o long` is.</span>
 
-<span class="sd">        This class is derived from the Python dictionary type.  The mapping is:</span>
+<span class="sd">    This class is derived from the Python dictionary type.  The mapping is:</span>
 
-<span class="sd">        key = option string with all dash &#39;-&#39; character(s) at the beginning of the string removed</span>
-<span class="sd">        value = definition argument string&quot;&quot;&quot;</span>
+<span class="sd">    key = option string with all dash &#39;-&#39; character(s) at the beginning of the string removed.  Internal dashes are</span>
+<span class="sd">    maintained.</span>
+
+<span class="sd">    value = definition argument string.</span>
+
+<span class="sd">    :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
         <span class="nb">dict</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_definitions_obj</span><span class="p">(</span><span class="n">argv</span><span class="p">))</span>
 
@@ -717,8 +766,8 @@
 <span class="sd">        is used to instantiate the Definitions class.  Option string keys are stripped of dash characters before the</span>
 <span class="sd">        first alphabetic character in the option name.</span>
 
-<span class="sd">        :param argv: ordered list of command line string arguments</span>
-<span class="sd">        :returns: dictionary with key = option string : value = definition argument string mapping&quot;&quot;&quot;</span>
+<span class="sd">        :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
+<span class="sd">        :returns: dictionary with {key = option string : value = definition argument string} mapping&quot;&quot;&quot;</span>
 
         <span class="n">defmap</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">arglist_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">argv</span><span class="p">)</span>
@@ -743,11 +792,14 @@
 
         <span class="k">return</span> <span class="n">defmap</span>
 
-<div class="viewcode-block" id="Definitions.contains"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Definitions.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates the presence (True) or absence (False) of a tuple of test definitions.</span>
-<span class="sd">        The definitions should be passed without initial dash characters in the definition argument name.</span>
+<div class="viewcode-block" id="Definitions.contains"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Definitions.contains">[docs]</a>    <span class="k">def</span> <span class="nf">contains</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns boolean that indicates the presence (True) or absence (False) of a tuple of option-argument</span>
+<span class="sd">        definitions by option match attempt.</span>
 
-<span class="sd">        :type needle: tuple of one or more definition argument strings for contains test</span>
+<span class="sd">        The definition option string should be used without any initial dash characters in the definition argument name</span>
+<span class="sd">        in contrast to how they were used on the command line.</span>
+
+<span class="sd">        :param needle: (tuple) A tuple of one or more option strings from expected definition option-argument string pairs</span>
 <span class="sd">        :returns: boolean&quot;&quot;&quot;</span>
 
         <span class="k">for</span> <span class="n">expected_definition</span> <span class="ow">in</span> <span class="n">needle</span><span class="p">:</span>
@@ -758,12 +810,12 @@
 
         <span class="k">return</span> <span class="bp">True</span>  <span class="c1"># if all tests above pass returns True</span></div>
 
-<div class="viewcode-block" id="Definitions.get_def_argument"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.Definitions.get_def_argument">[docs]</a>    <span class="k">def</span> <span class="nf">get_def_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the defintion option string for an option needle.  The needle parameter should not include</span>
-<span class="sd">        dash characters at the beginning of the option string (i.e. use &#39;test&#39; rather than &#39;--test&#39; and</span>
-<span class="sd">        &#39;t&#39; rather than &#39;-t&#39;.</span>
+<div class="viewcode-block" id="Definitions.get_def_argument"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Definitions.get_def_argument">[docs]</a>    <span class="k">def</span> <span class="nf">get_def_argument</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">needle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the definition argument string for a definition option test.  The needle parameter should not include</span>
+<span class="sd">        dash characters at the beginning of the option string (i.e. use &#39;test&#39; rather than &#39;--test&#39; and &#39;t&#39; rather than</span>
+<span class="sd">        &#39;-t&#39;).</span>
 
-<span class="sd">        :param needle: the requested definition option string.</span>
+<span class="sd">        :param needle: (string) The requested option string from the definition option-argument pair.</span>
 <span class="sd">        :returns: string</span>
 <span class="sd">        :raises: MissingDictionaryKeyError if the option needle is not a key defined in the Definitions object&quot;&quot;&quot;</span>
 
@@ -773,7 +825,25 @@
             <span class="k">raise</span> <span class="n">MissingDictionaryKeyError</span><span class="p">(</span><span class="n">needle</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="MultiDefinitions"><a class="viewcode-back" href="../../commandlines.html#commandlines.library.MultiDefinitions">[docs]</a><span class="k">class</span> <span class="nc">MultiDefinitions</span><span class="p">(</span><span class="n">Definitions</span><span class="p">):</span>
+<div class="viewcode-block" id="MultiDefinitions"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.MultiDefinitions">[docs]</a><span class="k">class</span> <span class="nc">MultiDefinitions</span><span class="p">(</span><span class="n">Definitions</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A class that is used to parse option-argument definitions from a command line argument list where command line</span>
+<span class="sd">    use includes multiple same option strings with different argument definitions.  An example is:</span>
+
+<span class="sd">    `$ executable -o file1 -o file2`</span>
+
+<span class="sd">    The class is derived from the commandlines.Definitions class (which is derived from Python dict). The</span>
+<span class="sd">    commandlines.Definitions.contains and commandlines.Definitions.get_def_arguments methods are inherited from the</span>
+<span class="sd">    Definitions class.</span>
+
+<span class="sd">    The dictionary mapping is:</span>
+
+<span class="sd">    key = option string with all dash &#39;-&#39; character(s) at the beginning of the string removed.  Internal dashes are</span>
+<span class="sd">    maintained.</span>
+
+<span class="sd">    value = list of all argument strings associated with the option string on the command line</span>
+
+<span class="sd">    :param argv: (list) A list of command line arguments that maintain the argument order that was entered on command line</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">):</span>
         <span class="n">Definitions</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argv</span><span class="p">)</span>
 
