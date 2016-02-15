@@ -18,9 +18,7 @@ How Do I Use It?
 ----------------
 
 Commandlines supports explicit, expressive command line application
-source code with a broad, permissive command syntax range. The goal is
-to make application logic simple to implement, intuitive, and easy to
-maintain.
+source code with a broad, permissive command syntax range.
 
 The command line string to your executable script is parsed to multiple
 objects that are derived from builtin Python types.
