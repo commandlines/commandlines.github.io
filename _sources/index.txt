@@ -49,9 +49,9 @@ Arguments
 | Command suite   | ``$ spam eggs``                   | ``c.subcmd == "eggs"``              |
 | sub-commands    |                                   |                                     |
 +-----------------+-----------------------------------+-------------------------------------+
-| Command suite   | ``$ spam eggs over easy``         | ``c.subsubcmd == "overeasy"``       |
-| sub-sub-command |                                   |                                     |
-| s               |                                   |                                     |
+| Command suite   | ``$ spam eggs overeasy``          | ``c.subsubcmd == "overeasy"``       |
+| sub-sub-commands|                                   |                                     |
+|                 |                                   |                                     |
 +-----------------+-----------------------------------+-------------------------------------+
 | Short switch    | ``$ spam -e``                     | ``c.contains_switches('e')``        |
 | syntax          |                                   |                                     |
