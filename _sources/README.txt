@@ -227,7 +227,7 @@ API Documentation
 ~~~~~~~~~~~~~~~~~
 
 The Command class is designed to be the public facing library object.
-You can view full documentation of this Python class
+You can view full documentation of this class
 `here <https://commandlines.github.io/commandlines.library.html#commandlines.library.Command>`__.
 
 If you would like to dig into lower level objects in the commandlines
