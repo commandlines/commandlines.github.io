@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Commandlines Library Documentation &mdash; commandlines 0.3.0 documentation</title>
+  <title>Commandlines Library Documentation &mdash; commandlines 0.3.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.0 documentation" href="#"/>
+    <link rel="top" title="commandlines 0.3.1 documentation" href="#"/>
         <link rel="next" title="commandlines.library module" href="commandlines.library.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -475,6 +475,41 @@ switches</td>
 </table>
 </div>
 </div>
+<div class="section" id="development-with-commandlines">
+<h3>Development with Commandlines<a class="headerlink" href="#development-with-commandlines" title="Permalink to this headline">¶</a></h3>
+<p>To facilitate development with Commandlines, you can print the string
+returned by the Command <code class="docutils literal"><span class="pre">obj_string()</span></code> method to view a list of the
+parsed arguments from example commands:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commandlines</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">obj_string</span><span class="p">())</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you execute your script with the command
+<code class="docutils literal"><span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">--toast</span> <span class="pre">-b</span> <span class="pre">--drink=milk</span> <span class="pre">filepath</span></code> and include the above
+print statement in your source, you will see the following in your
+terminal emulator:</p>
+<div class="code shell highlight-python"><div class="highlight"><pre><span></span>$ spam eggs --toast -b --drink=milk filepath
+obj.argc = 5
+obj.arguments = [&#39;eggs&#39;, &#39;--toast&#39;, &#39;-b&#39;, &#39;--drink=milk&#39;, &#39;filepath&#39;]
+obj.switches = {&#39;toast&#39;, &#39;b&#39;}
+obj.defs = {&#39;drink&#39;: &#39;milk&#39;}
+obj.mdefs = {}
+obj.mops = {}
+obj.arg0 = &#39;eggs&#39;
+obj.arg1 = &#39;--toast&#39;
+obj.arg2 = &#39;-b&#39;
+obj.arg3 = &#39;--drink=milk&#39;
+obj.arg4 = &#39;filepath&#39;
+obj.arglp = &#39;filepath&#39;
+obj.subcmd = &#39;eggs&#39;
+obj.subsubcmd = &#39;--toast&#39;
+</pre></div>
+</div>
+</div>
 <div class="section" id="api-documentation">
 <h3>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h3>
 <p>You can view full documentation of the Command class <a class="reference external" href="https://commandlines.github.io/commandlines.library.html#commandlines.library.Command">here</a>.</p>
@@ -580,7 +615,7 @@ Command object by adding the following lines to your Python script:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.0',
+            VERSION:'0.3.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

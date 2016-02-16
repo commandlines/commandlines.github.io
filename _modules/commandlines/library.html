@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>commandlines.library &mdash; commandlines 0.3.0 documentation</title>
+  <title>commandlines.library &mdash; commandlines 0.3.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.0 documentation" href="../../index.html"/>
+    <link rel="top" title="commandlines 0.3.1 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.3.0
+                0.3.1
               </div>
             
           
@@ -512,17 +512,17 @@
     <span class="c1"># /////////////////////////////////////////////////////////////</span>
 
 <div class="viewcode-block" id="Command.obj_string"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.obj_string">[docs]</a>    <span class="k">def</span> <span class="nf">obj_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns a string of the instance attributes of the Command object intended for standard output use</span>
-<span class="sd">        as a display of parsed Command object attributes.  Intended for use by a developer who would like a simple way</span>
-<span class="sd">        to print these values to the standard output of a terminal emulator for testing purposes.</span>
+        <span class="sd">&quot;&quot;&quot;Returns a string of the instance attributes of the Command object intended for standard output use.</span>
+<span class="sd">        Print the returned string to view the parsed arguments in the standard output stream.</span>
 
 <span class="sd">        :returns: string&quot;&quot;&quot;</span>
 
-        <span class="n">the_string</span> <span class="o">=</span> <span class="s2">&quot;obj.arguments = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span>
+        <span class="n">the_string</span> <span class="o">=</span> <span class="s2">&quot;obj.argc = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argc</span><span class="p">)</span>
+        <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.arguments = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.switches = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.defs = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span>
+        <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.mdefs = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.mops = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mops</span><span class="p">)</span>
-        <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.argc = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argc</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.arg0 = &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_obj_string_format_arg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg0</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.arg1 = &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_obj_string_format_arg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg1</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.arg2 = &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_obj_string_format_arg</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arg2</span><span class="p">)</span>
@@ -954,7 +954,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3.0',
+            VERSION:'0.3.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
