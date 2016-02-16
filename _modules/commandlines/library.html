@@ -153,21 +153,34 @@
 <span class="sd">    The class is instantiated from the list of command line arguments that are passed to a Python script in `sys.argv`.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">             arg0: (string) argument at index position 0</span>
-<span class="sd">             arg1: (string) argument at index position 1</span>
-<span class="sd">             arg2: (string) argument at index position 2</span>
-<span class="sd">             arg3: (string) argument at index position 3</span>
-<span class="sd">             arg4: (string) argument at index position 4</span>
-<span class="sd">             argc: (integer) length of the arguments list</span>
-<span class="sd">            arglp: (string) argument at last index position in the arguments list</span>
-<span class="sd">        arguments: (Arguments, list) list of all ordered positional arguments in the command string</span>
-<span class="sd">             defs: (Definitions, dict) dictionary of key=option : value=argument definition pairs</span>
-<span class="sd">            mdefs: (MultiDefinitions, Definitions, dict) dictionary of key=option : value=argument definition pairs for</span>
-<span class="sd">                    options that are included more than once in a command</span>
-<span class="sd">             mops: (set) set of multi-option short syntax (i.e. single dash) switches</span>
-<span class="sd">           subcmd: (string) the first positional argument (=arg0)</span>
-<span class="sd">        subsubcmd: (string) the second positional argument (=arg1)</span>
-<span class="sd">         switches: (set) set of long and short switch syntax arguments</span>
+<span class="sd">        arg0 : (string)</span>
+<span class="sd">               Argument at index position 0</span>
+<span class="sd">        arg1 : (string)</span>
+<span class="sd">               Argument at index position 1</span>
+<span class="sd">        arg2 : (string)</span>
+<span class="sd">               Argument at index position 2</span>
+<span class="sd">        arg3 : (string)</span>
+<span class="sd">               Argument at index position 3</span>
+<span class="sd">        arg4 : (string)</span>
+<span class="sd">               Argument at index position 4</span>
+<span class="sd">        argc : (int)</span>
+<span class="sd">               Length of the arguments list</span>
+<span class="sd">        arglp : (string)</span>
+<span class="sd">                Argument at last index position in the arguments list</span>
+<span class="sd">        arguments: (Arguments, list)</span>
+<span class="sd">                   List of all ordered positional arguments in the command string</span>
+<span class="sd">        defs: (Definitions, dict)</span>
+<span class="sd">               Dictionary of key=option : value=argument definition pairs</span>
+<span class="sd">        mdefs: (MultiDefinitions, Definitions, dict)</span>
+<span class="sd">                Dictionary of key=option : value=argument definition pairs for options included more than once in command</span>
+<span class="sd">        mops: (set)</span>
+<span class="sd">               Set of multi-option short syntax (i.e. single dash) switches</span>
+<span class="sd">        subcmd: (string)</span>
+<span class="sd">                 The first positional argument (=arg0)</span>
+<span class="sd">        subsubcmd: (string)</span>
+<span class="sd">               The second positional argument (=arg1)</span>
+<span class="sd">        switches: (set)</span>
+<span class="sd">               Set of long and short switch syntax arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
