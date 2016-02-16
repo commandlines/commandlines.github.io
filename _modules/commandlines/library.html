@@ -151,6 +151,23 @@
 <span class="sd">    the development of Python command line applications.</span>
 
 <span class="sd">    The class is instantiated from the list of command line arguments that are passed to a Python script in `sys.argv`.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">             arg0: (string) argument at index position 0</span>
+<span class="sd">             arg1: (string) argument at index position 1</span>
+<span class="sd">             arg2: (string) argument at index position 2</span>
+<span class="sd">             arg3: (string) argument at index position 3</span>
+<span class="sd">             arg4: (string) argument at index position 4</span>
+<span class="sd">             argc: (integer) length of the arguments list</span>
+<span class="sd">            arglp: (string) argument at last index position in the arguments list</span>
+<span class="sd">        arguments: (Arguments, list) list of all ordered positional arguments in the command string</span>
+<span class="sd">             defs: (Definitions, dict) dictionary of key=option : value=argument definition pairs</span>
+<span class="sd">            mdefs: (MultiDefinitions, Definitions, dict) dictionary of key=option : value=argument definition pairs for</span>
+<span class="sd">                    options that are included more than once in a command</span>
+<span class="sd">             mops: (set) set of multi-option short syntax (i.e. single dash) switches</span>
+<span class="sd">           subcmd: (string) the first positional argument (=arg0)</span>
+<span class="sd">        subsubcmd: (string) the second positional argument (=arg1)</span>
+<span class="sd">         switches: (set) set of long and short switch syntax arguments</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
@@ -174,6 +191,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">has_defs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_mdefs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 
+    <span class="c1"># v0.3.1</span>
+    <span class="c1"># TODO: add object string support for testing</span>
     <span class="c1"># v0.4.0</span>
     <span class="c1"># TODO: support for default arguments in definitions</span>
     <span class="c1"># TODO: implement mandatory argument test that supports short / long option alternatives</span>
@@ -337,7 +356,7 @@
 
 <div class="viewcode-block" id="Command.has_args_after"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.has_args_after">[docs]</a>    <span class="k">def</span> <span class="nf">has_args_after</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argument_needle</span><span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Test for the presence of at least one (default) positional arguments following an existing argument</span>
-<span class="sd">        (argument_needle).  The number of expected arguments is modified by definining the number method parameter.</span>
+<span class="sd">        (argument_needle).  The number of expected arguments is modified by defining the `number` method parameter.</span>
 
 <span class="sd">        :param number: (integer) The number of expected arguments after the test argument</span>
 <span class="sd">        :param argument_needle: (string) The test argument that is known to be present in the command</span>

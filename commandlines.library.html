@@ -250,6 +250,38 @@ Public calls should use the get_argument() method instead.</p>
 <p>An object that maintains syntax specific components of a command line string and provides methods to support
 the development of Python command line applications.</p>
 <p>The class is instantiated from the list of command line arguments that are passed to a Python script in <cite>sys.argv</cite>.</p>
+<dl class="docutils">
+<dt>Attributes:</dt>
+<dd><blockquote class="first">
+<div><blockquote>
+<div>arg0: (string) argument at index position 0
+arg1: (string) argument at index position 1
+arg2: (string) argument at index position 2
+arg3: (string) argument at index position 3
+arg4: (string) argument at index position 4
+argc: (integer) length of the arguments list</div></blockquote>
+<p>arglp: (string) argument at last index position in the arguments list</p>
+</div></blockquote>
+<dl class="last docutils">
+<dt>arguments: (Arguments, list) list of all ordered positional arguments in the command string</dt>
+<dd><blockquote class="first">
+<div><blockquote>
+<div>defs: (Definitions, dict) dictionary of key=option : value=argument definition pairs</div></blockquote>
+<dl class="docutils">
+<dt>mdefs: (MultiDefinitions, Definitions, dict) dictionary of key=option <span class="classifier-delimiter">:</span> <span class="classifier">value=argument definition pairs for</span></dt>
+<dd><blockquote class="first">
+<div>options that are included more than once in a command</div></blockquote>
+<p class="last">mops: (set) set of multi-option short syntax (i.e. single dash) switches</p>
+</dd>
+</dl>
+</div></blockquote>
+<p class="last">subcmd: (string) the first positional argument (=arg0)</p>
+</dd>
+<dt>subsubcmd: (string) the second positional argument (=arg1)</dt>
+<dd>switches: (set) set of long and short switch syntax arguments</dd>
+</dl>
+</dd>
+</dl>
 <dl class="method">
 <dt id="commandlines.library.Command.contains_definitions">
 <code class="descname">contains_definitions</code><span class="sig-paren">(</span><em>*def_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_definitions" title="Permalink to this definition">¶</a></dt>
@@ -467,7 +499,7 @@ syntax on the command line (e.g. <cite>$ executable -o file1 -o file2</cite>)</p
 <dt id="commandlines.library.Command.has_args_after">
 <code class="descname">has_args_after</code><span class="sig-paren">(</span><em>argument_needle</em>, <em>number=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.has_args_after"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.has_args_after" title="Permalink to this definition">¶</a></dt>
 <dd><p>Test for the presence of at least one (default) positional arguments following an existing argument
-(argument_needle).  The number of expected arguments is modified by definining the number method parameter.</p>
+(argument_needle).  The number of expected arguments is modified by defining the <cite>number</cite> method parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
