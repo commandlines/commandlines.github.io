@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>commandlines.library module &mdash; commandlines 0.3.2 documentation</title>
+  <title>commandlines.library module &mdash; commandlines 0.3.3 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.2 documentation" href="index.html"/>
+    <link rel="top" title="commandlines 0.3.3 documentation" href="index.html"/>
         <link rel="next" title="commandlines.exceptions module" href="commandlines.exceptions.html"/>
         <link rel="prev" title="Commandlines Library Documentation" href="index.html"/> 
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.3.2
+                0.3.3
               </div>
             
           
@@ -558,7 +558,21 @@ of the argument list and is case-sensitive.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included help request option. False = did not include help request option.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included help option. False = did not include help option.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.is_quiet_request">
+<code class="descname">is_quiet_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_quiet_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_quiet_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for <cite>&#8211;quiet</cite> option in command string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included quiet option.  False = did not include quiet option.</td>
 </tr>
 </tbody>
 </table>
@@ -572,7 +586,21 @@ of the argument list and is case-sensitive.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included usage request option. False = did not include usage request option.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included usage option. False = did not include usage option.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.is_verbose_request">
+<code class="descname">is_verbose_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.is_verbose_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.is_verbose_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for <cite>&#8211;verbose</cite> option in command string</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included verbose option. False = did not include verbose option.</td>
 </tr>
 </tbody>
 </table>
@@ -586,7 +614,7 @@ of the argument list and is case-sensitive.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included version request option. False = did not include version request option.</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">boolean. True = included version option. False = did not include version option.</td>
 </tr>
 </tbody>
 </table>
@@ -905,7 +933,7 @@ argument name.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.2',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

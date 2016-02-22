@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Commandlines Library Documentation &mdash; commandlines 0.3.2 documentation</title>
+  <title>Commandlines Library Documentation &mdash; commandlines 0.3.3 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.2 documentation" href="index.html"/> 
+    <link rel="top" title="commandlines 0.3.3 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.2
+                0.3.3
               </div>
             
           
@@ -206,14 +206,14 @@ syntax</td>
 <tr class="row-odd"><td>Long opt-arg
 definition
 syntax</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--out</span> <span class="pre">egg</span> <span class="pre">s</span></code></td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--out</span> <span class="pre">eggs</span></code></td>
 <td><code class="docutils literal"><span class="pre">c.get_definition('out')</span></code></td>
 </tr>
 <tr class="row-even"><td>Alt long
 opt-arg
 definition
 syntax</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--out=egg</span> <span class="pre">s</span></code></td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--out=eggs</span></code></td>
 <td><code class="docutils literal"><span class="pre">c.get_definition('out')</span></code></td>
 </tr>
 <tr class="row-odd"><td>Multiple same
@@ -225,7 +225,7 @@ definitions</td>
 <tr class="row-even"><td>Multi-option
 short syntax
 switches</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-mpns</span> <span class="pre">egg</span> <span class="pre">s</span></code></td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-mpns</span> <span class="pre">eggs</span></code></td>
 <td><code class="docutils literal"><span class="pre">c.contains_mops('m')</span></code></td>
 </tr>
 <tr class="row-odd"><td>Next positional
@@ -298,6 +298,70 @@ argument</td>
 arguments</td>
 <td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">-b</span> <span class="pre">-</span> <span class="pre">-toast</span> <span class="pre">filepath</span></code></td>
 <td><code class="docutils literal"><span class="pre">c.arguments</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="help-usage-and-version-request-testing-methods">
+<h4>Help, Usage, and Version Request Testing Methods<a class="headerlink" href="#help-usage-and-version-request-testing-methods" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="33%" />
+<col width="30%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Test Type</th>
+<th class="head">Command Example</th>
+<th class="head">Tested With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Help request, short</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-h</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_help_request()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Help request, long</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--help</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_help_request()</span></code></td>
+</tr>
+<tr class="row-even"><td>Usage request</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--usage</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_usage_request()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Version request, short</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-v</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_version_request()</span></code></td>
+</tr>
+<tr class="row-even"><td>Version request, long</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--version</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_version_request()</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="testing-methods-for-other-commonly-used-switches">
+<h4>Testing Methods for Other Commonly Used Switches<a class="headerlink" href="#testing-methods-for-other-commonly-used-switches" title="Permalink to this headline">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="31%" />
+<col width="34%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Test Type</th>
+<th class="head">Command Example</th>
+<th class="head">Tested With</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Verbose standard output</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">--verbose</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_verbose_request()</span></code></td>
+</tr>
+<tr class="row-odd"><td>Quiet standard output</td>
+<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">--quiet</span></code></td>
+<td><code class="docutils literal"><span class="pre">c.is_quiet_request()</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -435,44 +499,6 @@ switches</td>
 </tbody>
 </table>
 </div>
-<div class="section" id="help-usage-and-version-request-testing-methods">
-<h4>Help, Usage, and Version Request Testing Methods<a class="headerlink" href="#help-usage-and-version-request-testing-methods" title="Permalink to this headline">¶</a></h4>
-<table border="1" class="docutils">
-<colgroup>
-<col width="33%" />
-<col width="30%" />
-<col width="38%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Test Type</th>
-<th class="head">Command Example</th>
-<th class="head">Tested With</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td>Help request, short</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-h</span></code></td>
-<td><code class="docutils literal"><span class="pre">c.is_help_request()</span></code></td>
-</tr>
-<tr class="row-odd"><td>Help request, long</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--help</span></code></td>
-<td><code class="docutils literal"><span class="pre">c.is_help_request()</span></code></td>
-</tr>
-<tr class="row-even"><td>Usage request</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--usage</span></code></td>
-<td><code class="docutils literal"><span class="pre">c.is_usage_request()</span></code></td>
-</tr>
-<tr class="row-odd"><td>Version request, short</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">-v</span></code></td>
-<td><code class="docutils literal"><span class="pre">c.is_version_request()</span></code></td>
-</tr>
-<tr class="row-even"><td>Version request, long</td>
-<td><code class="docutils literal"><span class="pre">$</span> <span class="pre">spam</span> <span class="pre">--version</span></code></td>
-<td><code class="docutils literal"><span class="pre">c.is_version_request()</span></code></td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
 <div class="section" id="development-with-commandlines">
 <h3>Development with Commandlines<a class="headerlink" href="#development-with-commandlines" title="Permalink to this headline">¶</a></h3>
@@ -487,7 +513,7 @@ parsed arguments from example commands:</p>
 <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>If you execute your script with the command
+<p>For example, if you execute your script with the command
 <code class="docutils literal"><span class="pre">spam</span> <span class="pre">eggs</span> <span class="pre">--toast</span> <span class="pre">-b</span> <span class="pre">--drink=milk</span> <span class="pre">filepath</span></code> and include the above
 print statement in your source, you will see the following in your
 terminal emulator:</p>
@@ -600,7 +626,7 @@ Command object by adding the following lines to your Python script:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.2',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

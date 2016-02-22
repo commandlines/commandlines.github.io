@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>commandlines.library &mdash; commandlines 0.3.2 documentation</title>
+  <title>commandlines.library &mdash; commandlines 0.3.3 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.2 documentation" href="../../index.html"/>
+    <link rel="top" title="commandlines 0.3.3 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.3.2
+                0.3.3
               </div>
             
           
@@ -204,9 +204,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">has_defs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_mdefs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="c1"># v0.3.2</span>
-    <span class="c1"># [X] refactor string testing in the instantiation of Switches, Mops, Definitions, MultiDefinitions objects</span>
-    <span class="c1">#     for significant Command object instantiation performance improvement</span>
+    <span class="c1"># v0.3.3</span>
+    <span class="c1"># [X]  --quiet &amp; --verbose switch testing support</span>
+    <span class="c1"># v0.3.4</span>
+    <span class="c1"># TODO: refactor contains methods to perform test, not call another method</span>
     <span class="c1"># v0.4.0</span>
     <span class="c1"># TODO: support for default arguments in definitions</span>
     <span class="c1"># TODO: implement mandatory argument test that supports short / long option alternatives</span>
@@ -298,9 +299,6 @@
 <span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">argc</span> <span class="o">==</span> <span class="n">number</span></div>
-
-    <span class="c1"># def validates_includes_mandatory_args(self, arglist):</span>
-    <span class="c1">#     pass</span>
 
     <span class="c1"># //////////////////////////////////////////////////////////////</span>
     <span class="c1">#</span>
@@ -472,16 +470,27 @@
 
     <span class="c1"># /////////////////////////////////////////////////////////////</span>
     <span class="c1">#</span>
-    <span class="c1">#  Default help, usage, and version parser methods</span>
+    <span class="c1">#  Default parsing methods for commonly used options/switches</span>
+    <span class="c1">#    - Includes support for POSIX / Gnu standard options</span>
     <span class="c1">#</span>
     <span class="c1"># /////////////////////////////////////////////////////////////</span>
 
 <div class="viewcode-block" id="Command.is_help_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_help_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_help_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Tests for `-h` and `--help` options in command string</span>
 
-<span class="sd">        :returns: boolean. True = included help request option. False = did not include help request option.&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = included help option. False = did not include help option.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;help&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span> <span class="ow">or</span> <span class="s2">&quot;h&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span></div>
+
+<div class="viewcode-block" id="Command.is_quiet_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_quiet_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_quiet_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests for `--quiet` option in command string</span>
+
+<span class="sd">        :returns: boolean. True = included quiet option.  False = did not include quiet option.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s2">&quot;quiet&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span></div>
@@ -489,9 +498,19 @@
 <div class="viewcode-block" id="Command.is_usage_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_usage_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_usage_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Tests for `--usage` option in command string</span>
 
-<span class="sd">        :returns: boolean. True = included usage request option. False = did not include usage request option.&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = included usage option. False = did not include usage option.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;usage&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">False</span></div>
+
+<div class="viewcode-block" id="Command.is_verbose_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_verbose_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_verbose_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests for `--verbose` option in command string</span>
+
+<span class="sd">        :returns: boolean. True = included verbose option. False = did not include verbose option.&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="s2">&quot;verbose&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">False</span></div>
@@ -499,7 +518,7 @@
 <div class="viewcode-block" id="Command.is_version_request"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.is_version_request">[docs]</a>    <span class="k">def</span> <span class="nf">is_version_request</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Tests for `-v` and `--version` options in command string.</span>
 
-<span class="sd">        :returns: boolean. True = included version request option. False = did not include version request option.&quot;&quot;&quot;</span>
+<span class="sd">        :returns: boolean. True = included version option. False = did not include version option.&quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="s2">&quot;version&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span> <span class="ow">or</span> <span class="s2">&quot;v&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">True</span>
@@ -961,7 +980,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3.2',
+            VERSION:'0.3.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
