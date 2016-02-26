@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>commandlines.library &mdash; commandlines 0.3.3 documentation</title>
+  <title>commandlines.library &mdash; commandlines 0.4.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.3 documentation" href="../../index.html"/>
+    <link rel="top" title="commandlines 0.4.0 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.3.3
+                0.4.0
               </div>
             
           
@@ -169,6 +169,8 @@
 <span class="sd">                Argument at last index position in the arguments list</span>
 <span class="sd">        arguments: (Arguments, list)</span>
 <span class="sd">                   List of all ordered positional arguments in the command string</span>
+<span class="sd">        defaults: (dict)</span>
+<span class="sd">                  Dictionary of default key : value mapped as option : argument value</span>
 <span class="sd">        defs: (Definitions, dict)</span>
 <span class="sd">               Dictionary of key=option : value=argument definition pairs</span>
 <span class="sd">        mdefs: (MultiDefinitions, Definitions, dict)</span>
@@ -185,6 +187,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">argv</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">arguments</span> <span class="o">=</span> <span class="n">Arguments</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">switches</span> <span class="o">=</span> <span class="n">Switches</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mops</span> <span class="o">=</span> <span class="n">Mops</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">defs</span> <span class="o">=</span> <span class="n">Definitions</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
@@ -205,8 +208,8 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">has_mdefs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 
     <span class="c1"># v0.4.0</span>
-    <span class="c1"># TODO: support for default arguments in definitions</span>
-    <span class="c1"># TODO: implement mandatory argument test that supports short / long option alternatives</span>
+    <span class="c1"># [X] support for default argument definitions</span>
+    <span class="c1"># TODO: implement support for short / long option alternatives</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="s2">&quot;&lt; Command object &gt; instantiated from arguments: &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">__str__</span><span class="p">()</span>
@@ -295,6 +298,48 @@
 <span class="sd">        :returns: boolean. True = validates. False = does not validate.&quot;&quot;&quot;</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">argc</span> <span class="o">==</span> <span class="n">number</span></div>
+
+    <span class="c1"># //////////////////////////////////////////////////////////////</span>
+    <span class="c1">#</span>
+    <span class="c1"># Default option:argument mapping methods</span>
+    <span class="c1">#</span>
+    <span class="c1"># //////////////////////////////////////////////////////////////</span>
+
+<div class="viewcode-block" id="Command.set_defaults"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.set_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">set_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_dictionary</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets default option : argument definitions with a dictionary parameter. The option keys should not include</span>
+<span class="sd">        dashes at the beginning of the option string.  One or more key:value pairs can be included in the</span>
+<span class="sd">        default_dictionary parameter.</span>
+
+<span class="sd">        :param default_dictionary: (dict) Defines the default key=option : value=argument mapping</span>
+<span class="sd">        :returns: None&quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">default_dictionary</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Command.contains_defaults"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.contains_defaults">[docs]</a>    <span class="k">def</span> <span class="nf">contains_defaults</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">default_needles</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tests for the presence of one or more default option : argument definitions in the Command.defaults parameter</span>
+
+<span class="sd">        :param default_needles: (tuple) One or more test default option strings</span>
+<span class="sd">        :returns: boolean.  True = the default options are defined. False = the default options are not defined&quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">needle</span> <span class="ow">in</span> <span class="n">default_needles</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">needle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">False</span>   <span class="c1"># if any needle is absent, returns False</span>
+        <span class="k">return</span> <span class="bp">True</span>   <span class="c1"># if all tests pass, returns True</span></div>
+
+<div class="viewcode-block" id="Command.get_default"><a class="viewcode-back" href="../../commandlines.library.html#commandlines.library.Command.get_default">[docs]</a>    <span class="k">def</span> <span class="nf">get_default</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">default_needle</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Gets the value for an existing default option : argument definition in the Command.defaults</span>
+<span class="sd">        parameter.  The default_needle option string should not include dashes at the beginning of the string.</span>
+
+<span class="sd">        :param default_needle: (string) The existing default option for which a value is requested</span>
+<span class="sd">        :returns: User-specified type.  A value of any type that is permissible as a value in Python dictionaries</span>
+<span class="sd">        :raises: MissingDictionaryKeyError if the key is not found in the Command.defaults dictionary&quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">default_needle</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="p">[</span><span class="n">default_needle</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">MissingDictionaryKeyError</span><span class="p">(</span><span class="n">default_needle</span><span class="p">)</span></div>
 
     <span class="c1"># //////////////////////////////////////////////////////////////</span>
     <span class="c1">#</span>
@@ -535,6 +580,7 @@
 
         <span class="n">the_string</span> <span class="o">=</span> <span class="s2">&quot;obj.argc = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">argc</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.arguments = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">arguments</span><span class="p">)</span>
+        <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.defaults = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defaults</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.switches = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">switches</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.defs = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span>
         <span class="n">the_string</span> <span class="o">=</span> <span class="n">the_string</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;obj.mdefs = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span>
@@ -976,7 +1022,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.3.3',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

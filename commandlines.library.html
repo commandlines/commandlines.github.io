@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>commandlines.library module &mdash; commandlines 0.3.3 documentation</title>
+  <title>commandlines.library module &mdash; commandlines 0.4.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.3 documentation" href="index.html"/>
+    <link rel="top" title="commandlines 0.4.0 documentation" href="index.html"/>
         <link rel="next" title="commandlines.exceptions module" href="commandlines.exceptions.html"/>
         <link rel="prev" title="Commandlines Library Documentation" href="index.html"/> 
 
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.3.3
+                0.4.0
               </div>
             
           
@@ -269,6 +269,8 @@ the development of Python command line applications.</p>
 <dd>Argument at last index position in the arguments list</dd>
 <dt>arguments: (Arguments, list)</dt>
 <dd>List of all ordered positional arguments in the command string</dd>
+<dt>defaults: (dict)</dt>
+<dd>Dictionary of default key : value mapped as option : argument value</dd>
 <dt>defs: (Definitions, dict)</dt>
 <dd>Dictionary of key=option : value=argument definition pairs</dd>
 <dt>mdefs: (MultiDefinitions, Definitions, dict)</dt>
@@ -284,6 +286,22 @@ the development of Python command line applications.</p>
 </dl>
 </dd>
 </dl>
+<dl class="method">
+<dt id="commandlines.library.Command.contains_defaults">
+<code class="descname">contains_defaults</code><span class="sig-paren">(</span><em>*default_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Tests for the presence of one or more default option : argument definitions in the Command.defaults parameter</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>default_needles</strong> &#8211; (tuple) One or more test default option strings</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">boolean.  True = the default options are defined. False = the default options are not defined</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="commandlines.library.Command.contains_definitions">
 <code class="descname">contains_definitions</code><span class="sig-paren">(</span><em>*def_needles</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.contains_definitions"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.contains_definitions" title="Permalink to this definition">¶</a></dt>
@@ -441,6 +459,25 @@ indicates presence (True) or absence (False) of one or more multi-definition opt
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingArgumentError when target_arg is not found in the parsed argument list</td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body">IndexOutOfRangeError when target_arg is the last positional argument</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.get_default">
+<code class="descname">get_default</code><span class="sig-paren">(</span><em>default_needle</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.get_default"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.get_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the value for an existing default option : argument definition in the Command.defaults
+parameter.  The default_needle option string should not include dashes at the beginning of the string.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>default_needle</strong> &#8211; (string) The existing default option for which a value is requested</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">User-specified type.  A value of any type that is permissible as a value in Python dictionaries</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body">MissingDictionaryKeyError if the key is not found in the Command.defaults dictionary</td>
 </tr>
 </tbody>
 </table>
@@ -652,6 +689,24 @@ Print the returned string to view the parsed arguments in the standard output st
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="commandlines.library.Command.set_defaults">
+<code class="descname">set_defaults</code><span class="sig-paren">(</span><em>default_dictionary</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/commandlines/library.html#Command.set_defaults"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#commandlines.library.Command.set_defaults" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets default option : argument definitions with a dictionary parameter. The option keys should not include
+dashes at the beginning of the option string.  One or more key:value pairs can be included in the
+default_dictionary parameter.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>default_dictionary</strong> &#8211; (dict) Defines the default key=option : value=argument mapping</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">None</td>
 </tr>
 </tbody>
 </table>
@@ -933,7 +988,7 @@ argument name.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.3',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Commandlines Library Documentation &mdash; commandlines 0.3.3 documentation</title>
+  <title>Commandlines Library Documentation &mdash; commandlines 0.4.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.3.3 documentation" href="index.html"/> 
+    <link rel="top" title="commandlines 0.4.0 documentation" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -58,7 +58,7 @@
             
             
               <div class="version">
-                0.3.3
+                0.4.0
               </div>
             
           
@@ -158,7 +158,7 @@ objects that are derived from builtin Python types.</p>
 <span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>and you have access to:</p>
+<p>and use the following instance attributes and methods to develop your application:</p>
 <div class="section" id="arguments">
 <h4>Arguments<a class="headerlink" href="#arguments" title="Permalink to this headline">¶</a></h4>
 <table border="1" class="docutils">
@@ -311,8 +311,58 @@ arguments</td>
 </tbody>
 </table>
 </div>
+<div class="section" id="default-option-argument-definitions">
+<h4>Default Option-Argument Definitions<a class="headerlink" href="#default-option-argument-definitions" title="Permalink to this headline">¶</a></h4>
+<p>Define option-argument defaults in a <code class="docutils literal"><span class="pre">defaults</span></code> Command instance
+attribute. This attribute is defined as an empty Python dictionary upon
+instantiation of the Command object. Use standard key index-based Python
+dictionary assignments or the <code class="docutils literal"><span class="pre">set_defaults</span></code> assignment method in the
+Command class to define default values. Default values can take any type
+that is permissible as a Python dictionary value.</p>
+<p>Here are examples of each approach that define defaults for <code class="docutils literal"><span class="pre">output</span></code>
+and <code class="docutils literal"><span class="pre">level</span></code> options:</p>
+<div class="section" id="key-index-based-default-assignments">
+<h5>Key Index-Based Default Assignments<a class="headerlink" href="#key-index-based-default-assignments" title="Permalink to this headline">¶</a></h5>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commandlines</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
+
+<span class="n">c</span><span class="o">.</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;output&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;test.txt&quot;</span>
+<span class="n">c</span><span class="o">.</span><span class="n">defaults</span><span class="p">[</span><span class="s1">&#39;level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="method-based-default-assignments">
+<h5>Method-Based Default Assignments<a class="headerlink" href="#method-based-default-assignments" title="Permalink to this headline">¶</a></h5>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">commandlines</span> <span class="kn">import</span> <span class="n">Command</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Command</span><span class="p">()</span>
+
+<span class="n">default_options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;output&#39;</span> <span class="p">:</span> <span class="s1">&#39;test.txt&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;level&#39;</span>  <span class="p">:</span> <span class="mi">10</span>
+<span class="p">}</span>
+<span class="n">c</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">default_options</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To test for the presence of a default option definition and obtain its
+value, use the <code class="docutils literal"><span class="pre">contains_defaults</span></code> and <code class="docutils literal"><span class="pre">get_default</span></code> methods,
+respectively:</p>
+<div class="code python highlight-python"><div class="highlight"><pre><span></span><span class="c1"># continued from code examples above</span>
+
+<span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">contains_definitions</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">):</span>
+    <span class="n">dosomething</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">get_definition</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">))</span>
+<span class="k">elif</span> <span class="n">c</span><span class="o">.</span><span class="n">contains_defaults</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">):</span>
+    <span class="n">dosomething</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">get_default</span><span class="p">(</span><span class="s1">&#39;output&#39;</span><span class="p">))</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">dosomethingelse</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="section" id="help-usage-and-version-request-testing-methods">
 <h4>Help, Usage, and Version Request Testing Methods<a class="headerlink" href="#help-usage-and-version-request-testing-methods" title="Permalink to this headline">¶</a></h4>
+<p>Help, usage, and version command line requests are tested with methods:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="33%" />
@@ -377,6 +427,10 @@ arguments</td>
 </div>
 <div class="section" id="special-command-line-idioms">
 <h4>Special Command Line Idioms<a class="headerlink" href="#special-command-line-idioms" title="Permalink to this headline">¶</a></h4>
+<p>The double dash idiom escapes all subsequent tokens from option/argument
+parsing. Methods are available to determine whether a double dash token
+is present in a command and obtain an ordered list of all command line
+arguments that follow this idiom:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
@@ -529,6 +583,7 @@ terminal emulator:</p>
 <div class="code shell highlight-python"><div class="highlight"><pre><span></span>$ spam eggs --toast -b --drink=milk filepath
 obj.argc = 5
 obj.arguments = [&#39;eggs&#39;, &#39;--toast&#39;, &#39;-b&#39;, &#39;--drink=milk&#39;, &#39;filepath&#39;]
+obj.defaults = {}
 obj.switches = {&#39;toast&#39;, &#39;b&#39;}
 obj.defs = {&#39;drink&#39;: &#39;milk&#39;}
 obj.mdefs = {}
@@ -635,7 +690,7 @@ Command object by adding the following lines to your Python script:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.3.3',
+            VERSION:'0.4.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
