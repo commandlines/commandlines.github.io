@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>commandlines.library &mdash; commandlines 0.4.0 documentation</title>
+  <title>commandlines.library &mdash; commandlines 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="commandlines 0.4.0 documentation" href="../../index.html"/>
+    <link rel="top" title="commandlines 0.4.1 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.4.0
+                0.4.1
               </div>
             
           
@@ -207,8 +207,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">has_defs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">has_mdefs</span> <span class="o">=</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mdefs</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="c1"># v0.4.0</span>
-    <span class="c1"># [X] support for default argument definitions</span>
+    <span class="c1"># v0.4.1</span>
+    <span class="c1">#  [X] optimize performance of Definitions and MultiDefinitions instantiation loops</span>
+    <span class="c1">#  [X] refactored initial dash testing block to eliminate repeat tests</span>
     <span class="c1"># TODO: implement support for short / long option alternatives</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -876,22 +877,23 @@
             <span class="c1"># performance improvement to eliminate multiple string testing calls within this loop</span>
             <span class="c1"># dash_truth_test = def_candidate.startswith(&quot;-&quot;)</span>
             <span class="n">dash_truth_test</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="ow">in</span> <span class="n">def_candidate</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="c1"># ignore all definition syntax strings after the double dash `--` command line idiom</span>
-            <span class="k">if</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">def_candidate</span> <span class="o">==</span> <span class="s2">&quot;--&quot;</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># defines -option=definition syntax</span>
-                <span class="k">if</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">def_candidate</span><span class="p">:</span>
-                    <span class="n">split_def</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
-                    <span class="n">cleaned_key</span> <span class="o">=</span> <span class="n">split_def</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>  <span class="c1"># remove dash characters from the option</span>
-                    <span class="n">defmap</span><span class="p">[</span><span class="n">cleaned_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">split_def</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-                <span class="c1"># defines -d &lt;positional def&gt; or --define &lt;positional def&gt; syntax</span>
-                <span class="k">elif</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">arglist_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
-                        <span class="n">def_candidate</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
-                        <span class="n">defmap</span><span class="p">[</span><span class="n">def_candidate</span><span class="p">]</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="c1"># ignore all definition syntax strings after the double dash `--` command line idiom</span>
+                <span class="k">if</span> <span class="n">def_candidate</span> <span class="o">==</span> <span class="s2">&quot;--&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># defines -option=definition syntax</span>
+                    <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">def_candidate</span><span class="p">:</span>
+                        <span class="n">split_def</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+                        <span class="n">cleaned_key</span> <span class="o">=</span> <span class="n">split_def</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>  <span class="c1"># remove dash characters from the option</span>
+                        <span class="n">defmap</span><span class="p">[</span><span class="n">cleaned_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">split_def</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="c1"># defines -d &lt;positional def&gt; or --define &lt;positional def&gt; syntax</span>
+                    <span class="k">elif</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">arglist_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+                            <span class="n">def_candidate</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+                            <span class="n">defmap</span><span class="p">[</span><span class="n">def_candidate</span><span class="p">]</span> <span class="o">=</span> <span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
 
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="k">return</span> <span class="n">defmap</span>
 
@@ -958,28 +960,29 @@
             <span class="c1"># performance improvement to eliminate multiple string testing calls within this loop</span>
             <span class="c1"># dash_truth_test = def_candidate.startswith(&quot;-&quot;)</span>
             <span class="n">dash_truth_test</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="ow">in</span> <span class="n">def_candidate</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-            <span class="c1"># ignore all definition syntax strings after the double dash `--` command line idiom</span>
-            <span class="k">if</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="n">def_candidate</span> <span class="o">==</span> <span class="s2">&quot;--&quot;</span><span class="p">:</span>
-                <span class="k">break</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="c1"># defines -option=definition syntax</span>
-                <span class="k">if</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span> <span class="ow">and</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">def_candidate</span><span class="p">:</span>
-                    <span class="n">split_def</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
-                    <span class="n">cleaned_key</span> <span class="o">=</span> <span class="n">split_def</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>  <span class="c1"># remove dash characters from the option</span>
-                    <span class="k">if</span> <span class="n">cleaned_key</span> <span class="ow">in</span> <span class="n">defmap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                        <span class="n">defmap</span><span class="p">[</span><span class="n">cleaned_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">split_def</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">defmap</span><span class="p">[</span><span class="n">cleaned_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_def</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
-                <span class="c1"># defines -d &lt;positional def&gt; or --define &lt;positional def&gt; syntax</span>
-                <span class="k">elif</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">arglist_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="ow">not</span> <span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
-                        <span class="n">def_candidate</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
-                        <span class="k">if</span> <span class="n">def_candidate</span> <span class="ow">in</span> <span class="n">defmap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                            <span class="n">defmap</span><span class="p">[</span><span class="n">def_candidate</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">dash_truth_test</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+                <span class="c1"># ignore all definition syntax strings after the double dash `--` command line idiom</span>
+                <span class="k">if</span> <span class="n">def_candidate</span> <span class="o">==</span> <span class="s2">&quot;--&quot;</span><span class="p">:</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># defines -option=definition syntax</span>
+                    <span class="k">if</span> <span class="s2">&quot;=&quot;</span> <span class="ow">in</span> <span class="n">def_candidate</span><span class="p">:</span>
+                        <span class="n">split_def</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)</span>
+                        <span class="n">cleaned_key</span> <span class="o">=</span> <span class="n">split_def</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>  <span class="c1"># remove dash characters from the option</span>
+                        <span class="k">if</span> <span class="n">cleaned_key</span> <span class="ow">in</span> <span class="n">defmap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="n">defmap</span><span class="p">[</span><span class="n">cleaned_key</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">split_def</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="n">defmap</span><span class="p">[</span><span class="n">def_candidate</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
+                            <span class="n">defmap</span><span class="p">[</span><span class="n">cleaned_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">split_def</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+                    <span class="c1"># defines -d &lt;positional def&gt; or --define &lt;positional def&gt; syntax</span>
+                    <span class="k">elif</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">arglist_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
+                            <span class="n">def_candidate</span> <span class="o">=</span> <span class="n">def_candidate</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">def_candidate</span> <span class="ow">in</span> <span class="n">defmap</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                                <span class="n">defmap</span><span class="p">[</span><span class="n">def_candidate</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">defmap</span><span class="p">[</span><span class="n">def_candidate</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">argv</span><span class="p">[</span><span class="n">counter</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]]</span>
 
-                <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c1"># keep only the dictionary key:value pairs that include multiple values from key:value items parsed above</span>
         <span class="n">multi_map</span> <span class="o">=</span> <span class="p">{}</span>
@@ -988,8 +991,6 @@
                 <span class="n">multi_map</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">defmap</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">multi_map</span></div>
-
-
 </pre></div>
 
            </div>
@@ -1022,7 +1023,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
